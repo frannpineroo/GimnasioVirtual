@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAINING! - Gestión de Ejercicios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ejercicios.css">
+</head>
+<body>
+    <!-- Menú Lateral -->
+    <aside class="sidebar">
+        <div class="app-name">
+            <h1>TRAINING!</h1>
+        </div>
+        
+        <div class="menu-section-title">Menú</div>
+        
+        <div class="menu-items">
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            
+            <a href="#" class="menu-item">
+                <i class="fas fa-users"></i>
+                <span>Clientes</span>
+            </a>
+            
+            <a href="ejercicios.html" class="menu-item active">
+                <i class="fas fa-dumbbell"></i>
+                <span>Ejercicios</span>
+            </a>
+            
+            <a href="#" class="menu-item">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Rutinas</span>
+            </a>
+        </div>
+    </aside>
+    
+    <!-- Contenido Principal para Ejercicios -->
+    <main class="main-content">
+        <div class="header">
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div>
+                    <h4>Juan Delgado</h4>
+                    <p>Entrenador certificado</p>
+                </div>
+            </div>
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar ejercicio..." id="search-input">
+            </div>
+        </div>
+        
+        <!-- Sección de Ejercicios -->
+        <div class="exercises-section">
+            <div class="section-header">
+                <h2 class="section-title">Gestión de Ejercicios</h2>
+                <a href="nuevo-ejercicio.html" class="btn btn-white">
+                    <i class="fas fa-plus"></i> Agregar Ejercicio
+                </a>
+            </div>
+            
+            <div class="exercises-table-container">
+                <table class="exercises-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Grupo Muscular</th>
+                            <th>Elemento</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="exercises-table-body">
+                        <!-- Los ejercicios se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Modal de confirmación para eliminar -->
+    <div class="modal" id="delete-modal">
+        <div class="modal-content">
+            <h2>Confirmar Eliminación</h2>
+            <p>¿Estás seguro de que deseas eliminar este ejercicio? Esta acción no se puede deshacer.</p>
+            <div class="modal-actions">
+                <button class="btn btn-white" id="cancel-delete">Cancelar</button>
+                <button class="btn btn-danger" id="confirm-delete">Eliminar</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/common.js"></script>
+    <script src="js/ejercicios.js"></script>
+</body>
+</html>

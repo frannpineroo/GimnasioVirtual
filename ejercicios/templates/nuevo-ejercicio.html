@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRAINING! - Nuevo Ejercicio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ejercicios.css">
+</head>
+<body>
+    <!-- Menú Lateral -->
+    <aside class="sidebar">
+        <div class="app-name">
+            <h1>TRAINING!</h1>
+        </div>
+        
+        <div class="menu-section-title">Menú</div>
+        
+        <div class="menu-items">
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+            
+            <a href="#" class="menu-item">
+                <i class="fas fa-users"></i>
+                <span>Clientes</span>
+            </a>
+            
+            <a href="ejercicios.html" class="menu-item">
+                <i class="fas fa-dumbbell"></i>
+                <span>Ejercicios</span>
+            </a>
+            
+            <a href="#" class="menu-item">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Rutinas</span>
+            </a>
+        </div>
+    </aside>
+    
+    <!-- Contenido Principal para Nuevo Ejercicio -->
+    <main class="main-content">
+        <div class="header">
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div>
+                    <h4>Juan Delgado</h4>
+                    <p>Entrenador certificado</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Formulario de Ejercicio -->
+        <div class="form-section">
+            <div class="section-header">
+                <h2 class="section-title">Crear Nuevo Ejercicio</h2>
+                <a href="ejercicios.html" class="btn btn-white">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+            
+            <form id="exercise-form" class="exercise-form">
+                <div class="form-group">
+                    <label for="exercise-name">Nombre del Ejercicio *</label>
+                    <input type="text" id="exercise-name" placeholder="Ej: Press de Banca" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="muscle-group">Grupo Muscular *</label>
+                    <select id="muscle-group" required>
+                        <option value="">Selecciona un grupo muscular</option>
+                        <option value="pectoral">Pectoral</option>
+                        <option value="espalda">Espalda</option>
+                        <option value="hombros">Hombros</option>
+                        <option value="biceps">Bíceps</option>
+                        <option value="triceps">Tríceps</option>
+                        <option value="piernas">Piernas</option>
+                        <option value="abdominales">Abdominales</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exercise-equipment">Elemento *</label>
+                    <select id="exercise-equipment" required>
+                        <option value="">Selecciona un elemento</option>
+                        <option value="mancuerna">Mancuerna</option>
+                        <option value="barra">Barra</option>
+                        <option value="polea">Polea</option>
+                        <option value="maquina">Máquina</option>
+                        <option value="cuerpo">Peso Corporal</option>
+                        <option value="banda">Banda Elástica</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exercise-description">Descripción</label>
+                    <textarea id="exercise-description" rows="4" placeholder="Describe el ejercicio, técnica, precauciones..."></textarea>
+                </div>
+                
+                <!-- Campo de imagen recuperado -->
+                <div class="form-group">
+                    <label for="exercise-image">Imagen (Opcional)</label>
+                    <input type="file" id="exercise-image" accept="image/*">
+                    <div class="image-preview" id="image-preview"></div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i> Guardar Ejercicio
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <script src="js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejar previsualización de imagen
+            const imageInput = document.getElementById('exercise-image');
+            const imagePreview = document.getElementById('image-preview');
+            
+            imageInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        imagePreview.innerHTML = `
+                            <img src="${e.target.result}" alt="Previsualización de imagen">
+                            <button type="button" class="btn btn-white btn-sm" id="remove-image">
+                                <i class="fas fa-times"></i> Eliminar imagen
+                            </button>
+                        `;
+                        
+                        // Evento para eliminar imagen
+                        document.getElementById('remove-image').addEventListener('click', function() {
+                            imageInput.value = '';
+                            imagePreview.innerHTML = '';
+                        });
+                    }
+                    
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+            
+            // Manejar el envío del formulario
+            document.getElementById('exercise-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Obtener valores del formulario
+                const name = document.getElementById('exercise-name').value;
+                const muscleGroup = document.getElementById('muscle-group').value;
+                const equipment = document.getElementById('exercise-equipment').value;
+                const description = document.getElementById('exercise-description').value;
+                const imageFile = document.getElementById('exercise-image').files[0];
+                
+                // Validar campos requeridos
+                if (!name || !muscleGroup || !equipment) {
+                    alert('Por favor completa los campos requeridos (*)');
+                    return;
+                }
+                
+                // Guardar en localStorage
+                const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
+                const newId = exercises.length > 0 ? Math.max(...exercises.map(e => e.id)) + 1 : 1;
+                
+                // Convertir imagen a base64 si existe
+                let imageBase64 = null;
+                if (imageFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        imageBase64 = event.target.result;
+                        saveExercise(exercises, newId, name, muscleGroup, equipment, description, imageBase64);
+                    };
+                    reader.readAsDataURL(imageFile);
+                } else {
+                    saveExercise(exercises, newId, name, muscleGroup, equipment, description, null);
+                }
+            });
+            
+            function saveExercise(exercises, id, name, muscleGroup, equipment, description, image) {
+                exercises.push({
+                    id,
+                    name,
+                    muscleGroup,
+                    equipment,
+                    description,
+                    image
+                });
+                
+                localStorage.setItem('exercises', JSON.stringify(exercises));
+                window.location.href = 'ejercicios.html';
+            }
+        });
+    </script>
+</body>
+</html>
