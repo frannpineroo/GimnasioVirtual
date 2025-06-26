@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAINING! - Inicio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/variables.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <!-- Menú Lateral -->
@@ -15,32 +15,25 @@
         <div class="app-name">
             <h1>TRAINING!</h1>
         </div>
-        
+
         <div class="menu-section-title">Menú</div>
-        
+
         <div class="menu-items">
             <a href="index.html" class="menu-item active">
-                <i class="fas fa-home"></i>
-                <span>Inicio</span>
+                <i class="fas fa-home"></i><span>Inicio</span>
             </a>
-            
             <a href="#" class="menu-item">
-                <i class="fas fa-users"></i>
-                <span>Clientes</span>
+                <i class="fas fa-users"></i><span>Clientes</span>
             </a>
-            
             <a href="ejercicios.html" class="menu-item">
-                <i class="fas fa-dumbbell"></i>
-                <span>Ejercicios</span>
+                <i class="fas fa-dumbbell"></i><span>Ejercicios</span>
             </a>
-            
             <a href="#" class="menu-item">
-                <i class="fas fa-clipboard-list"></i>
-                <span>Rutinas</span>
+                <i class="fas fa-clipboard-list"></i><span>Rutinas</span>
             </a>
         </div>
     </aside>
-    
+
     <!-- Contenido Principal -->
     <main class="main-content">
         <div class="header">
@@ -55,12 +48,12 @@
                 <i class="fas fa-search"></i>
             </div>
         </div>
-        
+
         <div class="welcome-section">
             <h2>Bienvenido al Panel de Control</h2>
             <p>Gestiona tus clientes, ejercicios y rutinas de entrenamiento de manera eficiente con nuestra plataforma.</p>
         </div>
-        
+
         <div class="stats-container">
             <div class="stat-card">
                 <div class="icon">
@@ -69,15 +62,15 @@
                 <h3>24</h3>
                 <p>Clientes Activos</p>
             </div>
-            
+
             <div class="stat-card">
                 <div class="icon">
                     <i class="fas fa-dumbbell"></i>
                 </div>
-                <h3>152</h3>
+                <h3>{{ total_exercises }}</h3>
                 <p>Ejercicios Disponibles</p>
             </div>
-            
+
             <div class="stat-card">
                 <div class="icon">
                     <i class="fas fa-clipboard-list"></i>
@@ -86,7 +79,7 @@
                 <p>Rutinas Creadas</p>
             </div>
         </div>
-        
+
         <h3 class="section-title">Actividad Reciente</h3>
         <div class="recent-activities">
             <div class="activity-card">
@@ -94,13 +87,13 @@
                 <p>María López se ha registrado en el sistema y ha completado su evaluación inicial.</p>
                 <div class="time">Hace 2 horas</div>
             </div>
-            
+
             <div class="activity-card">
                 <h4><i class="fas fa-dumbbell"></i> Ejercicio Actualizado</h4>
                 <p>Se ha modificado la técnica del ejercicio "Press de Banca" para mejorar su ejecución.</p>
                 <div class="time">Hace 1 día</div>
             </div>
-            
+
             <div class="activity-card">
                 <h4><i class="fas fa-clipboard-check"></i> Rutina Completada</h4>
                 <p>Carlos Rodríguez ha completado la rutina "Fuerza Maxima Nivel 3" con éxito.</p>
@@ -108,7 +101,7 @@
             </div>
         </div>
     </main>
-    
+
     <script src="js/common.js"></script>
 </body>
 </html>

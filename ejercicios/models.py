@@ -1,13 +1,13 @@
 from django.db import models
 
-class Ejercicio(models.Model):
-    nombre = models.CharField(max_length=100)
-    descripcion = models.TextField()
-    grupo_muscular = models.CharField(max_length=50)
-    equipamiento = models.CharField(max_length=100, blank=True, null=True)
-    creado = models.DateTimeField(auto_now_add=True)
+class Exercise(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    muscle_group = models.CharField(max_length=50)
+    equipment = models.CharField(max_length=100, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.nombre
+        return self.name
 
 

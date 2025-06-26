@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Ejercicio
-from .serializers import EjercicioSerializer
+from .models import Exercise
+from .serializers import ExerciseSerializer
 
-class EjercicioViewSet(viewsets.ModelViewSet):
-    queryset = Ejercicio.objects.all()
-    serializer_class = EjercicioSerializer
+class ExerciseViewSet(viewsets.ModelViewSet):
+    queryset = Exercise.objects.all()
+    serializer_class = ExerciseSerializer
+
+def index(request):
+    total_exercises = Exercise.objects.count()
+    return render(request, 'index.html', {'total_exercises': total_exercises})

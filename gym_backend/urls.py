@@ -16,19 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ejercicios import views as ejercicio_views
+from ejercicios import views as exercise_views
 from rest_framework.routers import DefaultRouter
-from ejercicios.views import EjercicioViewSet
+from ejercicios.views import ExerciseViewSet
 
 router = DefaultRouter()
-router.registrer(r'ejercicios', EjercicioViewSet)
+router.register(r'ejercicios', ExerciseViewSet)
 
 urlpatterns = [
+    path('', exercise_views.index, name='index'),
     path('admin/', admin.site.urls),
-    #Vistas tradicionales
-    path('', ejercicio_views.index, name='index'),
-    path('ejercicios/', ejercicio_views.lista_ejercicios, name='ejercicios'),
-    path('nuevo-ejercicio/', ejercicio_views.nuevo_ejercicio, name='nuevo_ejercicio'),
 
     #API REST
     path('api/', include(router.urls)),

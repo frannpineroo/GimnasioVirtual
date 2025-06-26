@@ -2,34 +2,43 @@
 
 // Variables globales
 let currentExerciseId = null;
+let allExercises = [];
 
-// Inicialización de la página
-document.addEventListener('DOMContentLoaded', function() {
-    // Cargar ejercicios desde localStorage
-    const exercises = JSON.parse(localStorage.getItem('exercises')) || [];
-    
-    // Renderizar la tabla de ejercicios
-    renderExercisesTable(exercises);
-    
-    // Event listener para búsqueda
-    document.getElementById('search-input').addEventListener('input', function() {
-        filterExercises(exercises);
+document.addEventListener('DOMContentLoaded', function () {
+    getExercises();
+
+    document.getElementById('search-input').addEventListener('input', function () {
+        filterExercises(this.value);
     });
-    
-    // Event listener para confirmar eliminación
-    document.getElementById('confirm-delete').addEventListener('click', function() {
-        deleteExercise(currentExerciseId, exercises);
+
+    document.getElementById('confirm-delete').addEventListener('click', function () {
+        if (currentExerciseId) {
+            deleteExercise(currentExerciseId);
+        }
     });
-    
-    // Event listener para cancelar eliminación
+
     document.getElementById('cancel-delete').addEventListener('click', closeModals);
 });
 
-// Función para renderizar la tabla de ejercicios
+function getExercises() {
+    fetch('/api/ejercicios/')
+        .then(response => {
+            if (!response.ok) throw new Error('Error al obtener ejercicios');
+            return response.json();
+        })
+        .then(data => {
+            allExercises = data;
+            renderExercisesTable(allExercises);
+        })
+        .catch(error => {
+            console.error('Error al cargar ejercicios:', error);
+        });
+}
+
 function renderExercisesTable(exercises) {
     const tbody = document.getElementById('exercises-table-body');
-    
-    if (exercises.length === 0) {
+
+    if (!exercises.length) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="5" style="text-align: center; padding: 30px;">
@@ -44,17 +53,12 @@ function renderExercisesTable(exercises) {
         `;
         return;
     }
-    
+
     tbody.innerHTML = exercises.map(exercise => `
         <tr>
-            <td>
-                <div class="exercise-name">${exercise.name}</div>
-                ${exercise.image ? `<div class="exercise-image-preview" data-image="${exercise.image}">
-                    <i class="fas fa-image"></i> Ver imagen
-                </div>` : ''}
-            </td>
-            <td>${capitalizeFirstLetter(exercise.muscleGroup)}</td>
-            <td>${capitalizeFirstLetter(exercise.equipment)}</td>
+            <td>${exercise.name}</td>
+            <td>${capitalizeFirstLetter(exercise.muscle_group)}</td>
+            <td>${capitalizeFirstLetter(exercise.equipment || '-')}</td>
             <td>${exercise.description || '-'}</td>
             <td class="actions-cell">
                 <a href="nuevo-ejercicio.html?id=${exercise.id}" class="action-btn edit-btn" title="Editar ejercicio">
@@ -66,75 +70,41 @@ function renderExercisesTable(exercises) {
             </td>
         </tr>
     `).join('');
-    
-    // Añadir event listeners a los botones de eliminar
+
     document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             currentExerciseId = parseInt(this.dataset.id);
             showDeleteModal();
         });
     });
-    
-    // Añadir event listeners para ver imágenes
-    document.querySelectorAll('.exercise-image-preview').forEach(preview => {
-        preview.addEventListener('click', function() {
-            const imageData = this.getAttribute('data-image');
-            showImageModal(imageData);
-        });
-    });
 }
 
-// Función para mostrar el modal de eliminación
+function filterExercises(searchTerm) {
+    const term = searchTerm.toLowerCase();
+    const filtered = allExercises.filter(e =>
+        e.name.toLowerCase().includes(term) ||
+        e.muscle_group.toLowerCase().includes(term) ||
+        (e.equipment && e.equipment.toLowerCase().includes(term)) ||
+        (e.description && e.description.toLowerCase().includes(term))
+    );
+    renderExercisesTable(filtered);
+}
+
+function deleteExercise(id) {
+    fetch(`/api/ejercicios/${id}/`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('No se pudo eliminar el ejercicio');
+            closeModals();
+            getExercises();
+        })
+        .catch(error => {
+            console.error('Error al eliminar ejercicio:', error);
+        });
+}
+
 function showDeleteModal() {
     const modal = document.getElementById('delete-modal');
     modal.classList.add('active');
-}
-
-// Función para mostrar el modal de imagen
-function showImageModal(imageData) {
-    const modal = document.createElement('div');
-    modal.className = 'modal active';
-    modal.innerHTML = `
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <div class="image-container">
-                <img src="${imageData}" alt="Imagen del ejercicio">
-            </div>
-        </div>
-    `;
-    
-    document.body.appendChild(modal);
-    
-    // Event listener para cerrar
-    modal.querySelector('.close-btn').addEventListener('click', function() {
-        modal.remove();
-    });
-    
-    // Cerrar al hacer clic fuera
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.remove();
-        }
-    });
-}
-
-// Función para filtrar ejercicios
-function filterExercises(exercises) {
-    const searchTerm = document.getElementById('search-input').value.toLowerCase();
-    const filteredExercises = exercises.filter(exercise => 
-        exercise.name.toLowerCase().includes(searchTerm) ||
-        exercise.muscleGroup.toLowerCase().includes(searchTerm) ||
-        exercise.equipment.toLowerCase().includes(searchTerm) ||
-        (exercise.description && exercise.description.toLowerCase().includes(searchTerm))
-    );
-    
-    renderExercisesTable(filteredExercises);
-}
-
-// Función para eliminar un ejercicio
-function deleteExercise(exerciseId, exercises) {
-    const updatedExercises = exercises.filter(e => e.id !== exerciseId);
-    localStorage.setItem('exercises', JSON.stringify(updatedExercises));
-    closeModals();
-    renderExercisesTable(updatedExercises);
 }
