@@ -19,6 +19,8 @@ from django.urls import path, include
 from ejercicios import views as exercise_views
 from rest_framework.routers import DefaultRouter
 from ejercicios.views import ExerciseViewSet
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 router.register(r'ejercicios', ExerciseViewSet)
@@ -26,7 +28,10 @@ router.register(r'ejercicios', ExerciseViewSet)
 urlpatterns = [
     path('', exercise_views.index, name='index'),
     path('admin/', admin.site.urls),
-
+    path('ejercicios.html', exercise_views.exercise_page, name='ejercicios'),
+    path('nuevo-ejercicio.html', exercise_views.new_exercise, name='nuevo_ejercicio'),
     #API REST
     path('api/', include(router.urls)),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

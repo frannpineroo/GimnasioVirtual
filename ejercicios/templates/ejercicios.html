@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,9 +7,9 @@
     <title>TRAINING! - Gestión de Ejercicios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/ejercicios.css" />
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ejercicios.css' %}">
 </head>
 <body>
     <!-- Menú Lateral -->
@@ -96,7 +97,7 @@
         </div>
     </main>
 
-    <!-- Modal de Eliminación -->
+    Modal de Eliminación
     <div class="modal" id="delete-modal">
         <div class="modal-content">
             <h2>Confirmar Eliminación</h2>
@@ -107,9 +108,8 @@
             </div>
         </div>
     </div>
-
-    <script src="js/common.js"></script>
-    <script src="js/ejercicios.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/ejercicios.js' %}"></script>
 
     <script>
         // Listeners para filtros

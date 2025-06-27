@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,9 +7,9 @@
     <title>TRAINING! - Nuevo Ejercicio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/ejercicios.css" />
+    <link rel="stylesheet" href="{% static 'css/variables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ejercicios.css' %}">
 </head>
 <body>
     <!-- Menú Lateral -->
@@ -101,7 +102,6 @@
         </div>
     </main>
 
-    <script src="js/common.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('exercise-form');
@@ -118,6 +118,13 @@
                     alert('Por favor completa los campos requeridos (*)');
                     return;
                 }
+                
+                console.log(JSON.stringify({
+                    name: name,
+                    muscle_group: muscleGroup,
+                    equipment: equipment,
+                    description: description
+                }));
 
                 fetch('/api/ejercicios/', {
                     method: 'POST',
