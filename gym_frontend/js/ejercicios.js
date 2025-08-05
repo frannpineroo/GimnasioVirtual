@@ -20,12 +20,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('cancel-delete').addEventListener('click', closeModals);
 });
 
+// GET: Obtener todos los ejercicios
 function getExercises() {
-    fetch('/api/ejercicios/')
-        .then(response => {
-            if (!response.ok) throw new Error('Error al obtener ejercicios');
-            return response.json();
-        })
+    fetch('http://localhost:8000/api/ejercicios/')
+        .then(response => response.json())
         .then(data => {
             allExercises = data;
             renderExercisesTable(allExercises);
@@ -33,6 +31,63 @@ function getExercises() {
         .catch(error => {
             console.error('Error al cargar ejercicios:', error);
         });
+}
+
+// POST: Crear un nuevo ejercicio
+function createExercise(exerciseData) {
+    fetch('http://localhost:8000/api/ejercicios/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(exerciseData)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('No se pudo crear el ejercicio');
+        return response.json();
+    })
+    .then(data => {
+        getExercises();
+    })
+    .catch(error => {
+        console.error('Error al crear ejercicio:', error);
+    });
+}
+
+// PUT: Actualizar un ejercicio existente
+function updateExercise(id, exerciseData) {
+    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(exerciseData)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('No se pudo actualizar el ejercicio');
+        return response.json();
+    })
+    .then(data => {
+        getExercises();
+    })
+    .catch(error => {
+        console.error('Error al actualizar ejercicio:', error);
+    });
+}
+
+// DELETE: Eliminar un ejercicio
+function deleteExercise(id) {
+    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) throw new Error('No se pudo eliminar el ejercicio');
+        closeModals();
+        getExercises();
+    })
+    .catch(error => {
+        console.error('Error al eliminar ejercicio:', error);
+    });
 }
 
 function renderExercisesTable(exercises) {
@@ -88,20 +143,6 @@ function filterExercises(searchTerm) {
         (e.description && e.description.toLowerCase().includes(term))
     );
     renderExercisesTable(filtered);
-}
-
-function deleteExercise(id) {
-    fetch(`/api/ejercicios/${id}/`, {
-        method: 'DELETE'
-    })
-        .then(response => {
-            if (!response.ok) throw new Error('No se pudo eliminar el ejercicio');
-            closeModals();
-            getExercises();
-        })
-        .catch(error => {
-            console.error('Error al eliminar ejercicio:', error);
-        });
 }
 
 function showDeleteModal() {

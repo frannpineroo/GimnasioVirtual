@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,8 +6,8 @@
     <title>TRAINING! - Inicio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="{% static 'css/variables.css' %}">
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
     <!-- Menú Lateral -->
@@ -68,7 +67,6 @@
                 <div class="icon">
                     <i class="fas fa-dumbbell"></i>
                 </div>
-                <h3>{{ total_exercises }}</h3>
                 <p>Ejercicios Disponibles</p>
             </div>
 
@@ -103,6 +101,6 @@
         </div>
     </main>
 
-    <script src="js/common.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

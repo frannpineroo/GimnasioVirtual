@@ -1,4 +1,6 @@
+@import url('variables.css');
 /* RESET Y ESTILOS BASE */
+
 * {
     margin: 0;
     padding: 0;
@@ -113,7 +115,7 @@ body {
     font-weight: 700;
     margin-bottom: var(--spacing-xs);
     background: linear-gradient(90deg, var(--primary-color), var(--text-primary));
-    -webkit-background-clip: text;
+    /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent;
 }
 
