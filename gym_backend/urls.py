@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ejercicios import views as exercise_views
+from entidades import views as exercise_views
 from rest_framework.routers import DefaultRouter
-from ejercicios.views import ExerciseViewSet
+from entidades.views import ExerciseViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 
