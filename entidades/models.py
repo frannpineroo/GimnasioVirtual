@@ -7,7 +7,7 @@ class Exercise(models.Model):
     equipment = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-class Usuario(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)

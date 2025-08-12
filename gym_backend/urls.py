@@ -23,7 +23,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = DefaultRouter()
-router.register(r'ejercicios', ExerciseViewSet)
+router.register(r'entidades', ExerciseViewSet)
 
 urlpatterns = [
     path('', exercise_views.index, name='index'),
