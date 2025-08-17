@@ -34,6 +34,26 @@ class Client(models.Model):
         ('inactive', 'Inactive')
     ], default='active')
 
+class Asignature(models.Model):
+    start_date = models.CharField(max_length=255)
+    end_date = models.CharField(max_length=255)
+    active = models.BooleanField(default=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='asignatures')
+    coach = models.ForeignKey(Coach, on_delete=models.CASCADE, related_name='asignatures')
+
+class Reminder(models.Model):
+    datetime_reminder = models.DateTimeField()
+    sent = models.ChariField(max_length=10, choices=[
+        ('yes', 'Yes'),
+        ('no', 'No')
+    ], default='no')
+    asignature = models.ForeignKey(Asignature, on_delete=models.CASCADE, related_name='reminders')
+
+class TrainingSession(models.Model):
+    create_time = models.DateTimeField(auto_now_add=True)
+    notes = models.CharField(max_length=45)
+    reminder = models.ForeignKey(Reminder, on_delete=models.CASCADE, related_name='training_sessions')
+
     def __str__(self):
         return self.name
 
