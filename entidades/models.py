@@ -6,6 +6,8 @@ class Exercise(models.Model):
     muscle_group = models.CharField(max_length=50)
     equipment = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    equipment = models.ManyToManyField('Equipement', related_name='exercises', blank=True)
+    muscle_groups = models.ManyToManyField('MuscleGroup', related_name='exercises', blank=True)
 
 class User(models.Model):
     name = models.CharField(max_length=100)
@@ -90,11 +92,9 @@ class ProgressRegister(models.Model):
 
 class Equipement(models.Model):
     name = models.CharField(max_length=100)
-    exercise = models.ManyToManyField(Exercise, related_name='equipments')
 
 class MuscleGroup(models.Model):
     name = models.CharField(max_length=100)
-    exercises = models.ManyToManyField(Exercise, related_name='muscle_groups')
 
     def __str__(self):
         return self.name
