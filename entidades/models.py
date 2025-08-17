@@ -43,7 +43,7 @@ class Asignature(models.Model):
 
 class Reminder(models.Model):
     datetime_reminder = models.DateTimeField()
-    sent = models.ChariField(max_length=10, choices=[
+    sent = models.CharField(max_length=10, choices=[
         ('yes', 'Yes'),
         ('no', 'No')
     ], default='no')
@@ -53,6 +53,48 @@ class TrainingSession(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     notes = models.CharField(max_length=45)
     reminder = models.ForeignKey(Reminder, on_delete=models.CASCADE, related_name='training_sessions')
+
+class Rutine(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    time_week = models.PositiveBigIntegerField()
+    is_template = models.BooleanField(max_length=45)
+    time_creation = models.DateTimeField(auto_now_add=True)
+    coach = models.ForeignKey(Coach, on_delete=models.CASCADE, related_name='routines')
+
+class DayRutine(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    order = models.CharField(max_length=45)
+    rutine = models.ForeignKey(Rutine, on_delete=models.CASCADE, related_name='day_routines')
+
+class ExerciseRutine(models.Model):
+    series = models.CharField(max_length=45)
+    repetitions = models.CharField(max_length=255)
+    tipe_serie = models.CharField(max_length=45, choices=[
+        ('normal', 'Normal'),
+        ('drop_set', 'Drop Set'),
+        ('superset', 'Superset'),
+        ('giant_set', 'Giant Set')
+    ])
+    dia_rutine = models.ForeignKey(DayRutine, on_delete=models.CASCADE, related_name='exercise_routines')
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name='exercise_routines')
+
+class ProgressRegister(models.Model):
+    body_weight = models.CharField(255, blank=True, null=True)
+    weight_used = models.CharField(max_length=255, blank=True, null=True)
+    repetitions_made = models.CharField(max_length=255, blank=True, null=True)
+    rm_value = models.CharField(max_length=255, blank=True, null=True)
+    session = models.ForeignKey(TrainingSession, on_delete=models.CASCADE, related_name='progress_registers')
+    rutine_exercise = models.ForeignKey(ExerciseRutine, on_delete=models.CASCADE, related_name='progress_registers')
+
+class Equipement(models.Model):
+    name = models.CharField(max_length=100)
+    exercise = models.ManyToManyField(Exercise, related_name='equipments')
+
+class MuscleGroup(models.Model):
+    name = models.CharField(max_length=100)
+    exercises = models.ManyToManyField(Exercise, related_name='muscle_groups')
 
     def __str__(self):
         return self.name
