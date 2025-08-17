@@ -17,6 +17,23 @@ class User(models.Model):
     rol = models.CharField(max_length=50)
     active = models.BooleanField(default=True)
 
+class Coach(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='coach')
+
+class Client(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='client')
+    experience_level = models.CharField(max_length=50, choices=[
+        ('beginner', 'Beginner'),
+        ('intermediate', 'Intermediate'),
+        ('advanced', 'Advanced')
+    ])
+    goal = models.CharField(max_length=100, blank=True, null=True)
+    injuries = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=50, choices=[
+        ('active', 'Active'),
+        ('inactive', 'Inactive')
+    ], default='active')
+
     def __str__(self):
         return self.name
 

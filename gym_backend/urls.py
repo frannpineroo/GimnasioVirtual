@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from entidades import views as exercise_views
 from rest_framework.routers import DefaultRouter
-from entidades.views import ExerciseViewSet
+from entidades.api_views import ExerciseViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 
