@@ -1,11 +1,22 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .api_views import EjercicioViewSet, UserViewSet
+from .api_views import EjercicioViewSet, UserViewSet, CoachViewSet, ClientViewSet, AsignatureViewSet, ReminderViewSet, TrainingSessionViewSet, RutineViewSet, DayRutineViewSet, ExerciseRutineViewSet, ProgressRegisterViewSet, EquipementViewSet, MuscleGroupViewSet
 from . import views
 
 router = DefaultRouter()
 router.register(r'entidades', EjercicioViewSet)
 router.register(r'usuarios', UserViewSet)
+router.register(r'entrenadores', CoachViewSet)
+router.register(r'clientes', ClientViewSet)
+router.register(r'asignaturas', AsignatureViewSet)
+router.register(r'recordatorios', ReminderViewSet)
+router.register(r'sesiones-entrenamiento', TrainingSessionViewSet)
+router.register(r'rutinas', RutineViewSet)
+router.register(r'dias-rutina', DayRutineViewSet)
+router.register(r'ejercicios-rutina', ExerciseRutineViewSet)
+router.register(r'registros-progreso', ProgressRegisterViewSet)
+router.register(r'equipos', EquipementViewSet)
+router.register(r'muscle-groups', MuscleGroupViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
