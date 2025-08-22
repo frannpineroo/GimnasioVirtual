@@ -16,22 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from entidades import views as exercise_views
-from rest_framework.routers import DefaultRouter
-from entidades.api_views import ExerciseViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 
-router = DefaultRouter()
-router.register(r'entidades', ExerciseViewSet)
 
 urlpatterns = [
-    path('', exercise_views.index, name='index'),
     path('admin/', admin.site.urls),
-    path('ejercicios.html', exercise_views.exercise_page, name='ejercicios'),
-    path('nuevo-ejercicio.html', exercise_views.new_exercise, name='nuevo_ejercicio'),
     #API REST
-    path('api/', include(router.urls)),
+    path('api/', include('entidades.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

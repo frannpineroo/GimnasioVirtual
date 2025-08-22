@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // GET: Obtener todos los ejercicios
 function getExercises() {
-    fetch('http://localhost:8000/api/ejercicios/')
+    fetch('http://localhost:8000/api/ejercicios/') 
         .then(response => response.json())
         .then(data => {
             allExercises = data;
@@ -35,7 +35,8 @@ function getExercises() {
 
 // POST: Crear un nuevo ejercicio
 function createExercise(exerciseData) {
-    fetch('http://localhost:8000/api/ejercicios/', {
+    console.log("Datos enviados:", exerciseData);
+    fetch('http://localhost:8000/api/ejercicios/', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -43,7 +44,13 @@ function createExercise(exerciseData) {
         body: JSON.stringify(exerciseData)
     })
     .then(response => {
-        if (!response.ok) throw new Error('No se pudo crear el ejercicio');
+        console.log("Status:", response.status);
+        if (!response.ok) {
+            return response.text().then(text => {  
+                console.log("Error response:", text);
+                throw new Error('No se pudo crear el ejercicio');
+            });
+        }
         return response.json();
     })
     .then(data => {
@@ -56,7 +63,7 @@ function createExercise(exerciseData) {
 
 // PUT: Actualizar un ejercicio existente
 function updateExercise(id, exerciseData) {
-    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {
+    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {  
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -77,7 +84,7 @@ function updateExercise(id, exerciseData) {
 
 // DELETE: Eliminar un ejercicio
 function deleteExercise(id) {
-    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {
+    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {  
         method: 'DELETE'
     })
     .then(response => {

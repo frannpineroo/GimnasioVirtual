@@ -102,6 +102,7 @@
     </main>
 
     <script>
+        // Reemplaza el código JavaScript en tu HTML con esto:
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('exercise-form');
 
@@ -117,31 +118,36 @@
                     alert('Por favor completa los campos requeridos (*)');
                     return;
                 }
-                
-                console.log(JSON.stringify({
+        
+                // Objeto con equipment como array
+                const exerciseData = {
                     name: name,
                     muscle_group: muscleGroup,
-                    equipment: equipment,
+                    equipment: [equipment],
                     description: description
-                }));
+                };
+
+                console.log('Datos enviados:', JSON.stringify(exerciseData));
 
                 fetch('http://localhost:8000/api/ejercicios/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        name: name,
-                        muscle_group: muscleGroup,
-                        equipment: equipment,
-                        description: description
-                    })
+                    body: JSON.stringify(exerciseData)
                 })
                 .then(response => {
-                    if (!response.ok) throw new Error('Error al guardar el ejercicio');
+                    console.log('Status:', response.status);
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            console.log('Error response:', text);
+                            throw new Error('Error al guardar el ejercicio');
+                        });
+                    }
                     return response.json();
                 })
                 .then(() => {
+                    alert('Ejercicio guardado exitosamente!');
                     window.location.href = 'ejercicios.html';
                 })
                 .catch(error => {

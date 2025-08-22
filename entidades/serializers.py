@@ -4,7 +4,7 @@ from .models import Exercise, User, Coach, Client,  Asignature, Reminder, Traini
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
-        fields = '__all__'
+        fields = ['id', 'name', 'muscle_group', 'equipment', 'description']
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const exerciseId = urlParams.get('id');
 
     if (exerciseId) {
-        fetch(`/api/ejercicios/${exerciseId}/`)
+        fetch(`/api/entidades/${exerciseId}/`)
             .then(response => {
                 if (!response.ok) throw new Error('Error al cargar el ejercicio');
                 return response.json();
