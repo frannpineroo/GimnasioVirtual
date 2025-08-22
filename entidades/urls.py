@@ -17,8 +17,6 @@ router.register(r'rutinas', RutineViewSet)
 router.register(r'dias-rutina', DayRutineViewSet)
 router.register(r'ejercicios-rutina', ExerciseRutineViewSet)
 router.register(r'registros-progreso', ProgressRegisterViewSet)
-router.register(r'equipos', EquipementViewSet)
-router.register(r'muscle-groups', MuscleGroupViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

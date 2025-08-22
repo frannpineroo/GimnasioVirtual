@@ -3,11 +3,9 @@ from django.db import models
 class Exercise(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
-    muscle_group = models.CharField(max_length=50)
-    equipment = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    equipment = models.ManyToManyField('Equipement', related_name='exercises', blank=True)
-    muscle_groups = models.ManyToManyField('MuscleGroup', related_name='exercises', blank=True)
+    equipment = models.TextField(max_length=255, blank=True, null=True)
+    muscle_groups = models.TextField(max_length=255, blank=True, null=True)  
 
 class User(models.Model):
     name = models.CharField(max_length=100)
@@ -89,12 +87,6 @@ class ProgressRegister(models.Model):
     rm_value = models.CharField(max_length=255, blank=True, null=True)
     session = models.ForeignKey(TrainingSession, on_delete=models.CASCADE, related_name='progress_registers')
     rutine_exercise = models.ForeignKey(ExerciseRutine, on_delete=models.CASCADE, related_name='progress_registers')
-
-class Equipement(models.Model):
-    name = models.CharField(max_length=100)
-
-class MuscleGroup(models.Model):
-    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
