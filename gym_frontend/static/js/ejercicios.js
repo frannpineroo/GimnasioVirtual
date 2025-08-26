@@ -4,6 +4,14 @@
 let currentExerciseId = null;
 let allExercises = [];
 
+// Función para capitalizar la primera letra 
+function capitalizeFirstLetter(string) {
+    if (!string || typeof string !== 'string') {
+        return '-'; // Devolver guión si es null/undefined
+    }
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     getExercises();
 
@@ -25,6 +33,10 @@ function getExercises() {
     fetch('http://localhost:8000/api/ejercicios/') 
         .then(response => response.json())
         .then(data => {
+            console.log('Datos recibidos de la API:', data);
+            if (data.length > 0) {
+                console.log('Primer ejercicio:', data[0]);
+            }
             allExercises = data;
             renderExercisesTable(allExercises);
         })
@@ -118,9 +130,9 @@ function renderExercisesTable(exercises) {
 
     tbody.innerHTML = exercises.map(exercise => `
         <tr>
-            <td>${exercise.name}</td>
+            <td>${exercise.name || '-'}</td>
             <td>${capitalizeFirstLetter(exercise.muscle_group)}</td>
-            <td>${capitalizeFirstLetter(exercise.equipment || '-')}</td>
+            <td>${capitalizeFirstLetter(exercise.equipment)}</td>
             <td>${exercise.description || '-'}</td>
             <td class="actions-cell">
                 <a href="nuevo-ejercicio.html?id=${exercise.id}" class="action-btn edit-btn" title="Editar ejercicio">
@@ -144,8 +156,8 @@ function renderExercisesTable(exercises) {
 function filterExercises(searchTerm) {
     const term = searchTerm.toLowerCase();
     const filtered = allExercises.filter(e =>
-        e.name.toLowerCase().includes(term) ||
-        e.muscle_group.toLowerCase().includes(term) ||
+        (e.name && e.name.toLowerCase().includes(term)) ||
+        (e.muscle_group && e.muscle_group.toLowerCase().includes(term)) ||
         (e.equipment && e.equipment.toLowerCase().includes(term)) ||
         (e.description && e.description.toLowerCase().includes(term))
     );
@@ -155,4 +167,11 @@ function filterExercises(searchTerm) {
 function showDeleteModal() {
     const modal = document.getElementById('delete-modal');
     modal.classList.add('active');
+}
+
+function closeModals() {
+    const modal = document.getElementById('delete-modal');
+    if (modal) {
+        modal.classList.remove('active');
+    }
 }
