@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAINING! - Nuevo Ejercicio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="css/ejercicios.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+    <!-- Menú Lateral -->
+    <aside class="sidebar">
+        <div class="app-name">
+            <h1>TRAINING!</h1>
+        </div>
+        <div class="menu-section-title">Menú</div>
+        <div class="menu-items">
+            <a href="index.html" class="menu-item">
+                <i class="fas fa-home"></i><span>Inicio</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-users"></i><span>Clientes</span>
+            </a>
+            <a href="ejercicios.html" class="menu-item">
+                <i class="fas fa-dumbbell"></i><span>Ejercicios</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-clipboard-list"></i><span>Rutinas</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+        <div class="header">
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div>
+                    <h4>Juan Delgado</h4>
+                    <p>Entrenador certificado</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulario de Ejercicio -->
+        <div class="form-section">
+            <div class="section-header">
+                <h2 class="section-title">Crear Nuevo Ejercicio</h2>
+                <a href="ejercicios.html" class="btn btn-white">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+
+            <form id="exercise-form" class="exercise-form">
+                <div class="form-group">
+                    <label for="exercise-name">Nombre del Ejercicio *</label>
+                    <input type="text" id="exercise-name" placeholder="Ej: Sentadilla" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="muscle-group">Grupo Muscular *</label>
+                    <select id="muscle-group" required>
+                        <option value="">Selecciona un grupo muscular</option>
+                        <option value="pectorales">Pectorales</option>
+                        <option value="espalda">Espalda</option>
+                        <option value="hombros">Hombros</option>
+                        <option value="biceps">Bíceps</option>
+                        <option value="triceps">Tríceps</option>
+                        <option value="piernas">Piernas</option>
+                        <option value="abdominales">Abdominales</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exercise-equipment">Elemento *</label>
+                    <select id="exercise-equipment" required>
+                        <option value="">Selecciona un elemento</option>
+                        <option value="mancuerna">Mancuerna</option>
+                        <option value="barra">Barra</option>
+                        <option value="polea">Polea</option>
+                        <option value="maquina">Máquina</option>
+                        <option value="peso corporal">Peso Corporal</option>
+                        <option value="banda">Banda Elástica</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="exercise-description">Descripción</label>
+                    <textarea id="exercise-description" rows="4" placeholder="Describe el ejercicio, técnica, precauciones..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i> Guardar Ejercicio
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <script src="js/nuevo-ejercicio.js"></script>
+</body>
+</html>

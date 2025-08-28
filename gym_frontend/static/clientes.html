@@ -18,9 +18,9 @@
         <div class="menu-section-title">Menú</div>
         <div class="menu-items">
             <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Inicio</span></a>
-            <a href="#" class="menu-item"><i class="fas fa-users"></i><span>Clientes</span></a>
+            <a href="clientes.html" class="menu-item"><i class="fas fa-users"></i><span>Clientes</span></a>
             <a href="ejercicios.html" class="menu-item active"><i class="fas fa-dumbbell"></i><span>Ejercicios</span></a>
-            <a href="#" class="menu-item"><i class="fas fa-clipboard-list"></i><span>Rutinas</span></a>
+            <a href="rutinas.html" class="menu-item"><i class="fas fa-clipboard-list"></i><span>Rutinas</span></a>
         </div>
     </aside>
 
@@ -36,59 +36,51 @@
             </div>
             <div class="search">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar ejercicio..." id="search-input" />
+                <input type="text" placeholder="Buscar cliente..." id="search-input" />
             </div>
         </div>
 
-        <!-- Sección de Ejercicios -->
-        <div class="exercises-section">
+        <!-- Sección de Clientes -->
+        <div class="clients-section">
             <div class="section-header">
-                <h2 class="section-title">Gestión de Ejercicios</h2>
-                <a href="nuevo-ejercicio.html" class="btn btn-white">
-                    <i class="fas fa-plus"></i> Agregar Ejercicio
+                <h2 class="section-title">Gestión de Clientes</h2>
+                <a href="nuevo-cliente.html" class="btn btn-white">
+                    <i class="fas fa-plus"></i> Agregar Cliente
                 </a>
             </div>
 
             <!-- Filtros -->
             <div class="filters" style="margin-bottom: 15px;">
-                <select id="filter-muscle" class="filter-select">
-                    <option value="">Grupo Muscular</option>
-                    <option value="pectorales">Pectorales</option>
-                    <option value="espalda">Espalda</option>
-                    <option value="hombros">Hombros</option>
-                    <option value="biceps">Bíceps</option>
-                    <option value="triceps">Tríceps</option>
-                    <option value="piernas">Piernas</option>
-                    <option value="abdominales">Abdominales</option>
+                <select id="filter-experience" class="filter-select">
+                    <option value="">Experiencia</option>
+                    <option value="beginner">Principiante</option>
+                    <option value="intermediate">Intermedio</option>
+                    <option value="advanced">Avanzado</option>
                 </select>
 
-                <select id="filter-equipment" class="filter-select">
-                    <option value="">Elemento</option>
-                    <option value="mancuerna">Mancuerna</option>
-                    <option value="barra">Barra</option>
-                    <option value="polea">Polea</option>
-                    <option value="maquina">Máquina</option>
-                    <option value="peso corporal">Peso Corporal</option>
-                    <option value="banda">Banda Elástica</option>
+                <select id="filter-status" class="filter-select">
+                    <option value="">Estado</option>
+                    <option value="active">Activo</option>
+                    <option value="inactive">Inactivo</option>
                 </select>
             </div>
 
-            <!-- Tabla de Ejercicios -->
-            <div class="exercises-table-container">
-                <table class="exercises-table">
+            <!-- Tabla de Clientes -->
+            <div class="clients-table-container">
+                <table class="clients-table">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Grupo Muscular</th>
-                            <th>Elemento</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
+                            <th>Experiencia</th>
+                            <th>Objetivo</th>
+                            <th>Lesiones</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody id="exercises-table-body">
+                    <tbody id="clients-table-body">
                         <tr id="loading-row">
                             <td colspan="5" style="text-align:center; padding: 30px;">
-                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando ejercicios...
+                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando clientes...
                             </td>
                         </tr>
                     </tbody>
@@ -97,30 +89,20 @@
         </div>
     </main>
 
-    Modal de Eliminación
-    <div class="modal" id="delete-modal">
-        <div class="modal-content">
-            <h2>Confirmar Eliminación</h2>
-            <p>¿Estás seguro de que deseas eliminar este ejercicio? Esta acción no se puede deshacer.</p>
-            <div class="modal-actions">
-                <button class="btn btn-white" id="cancel-delete">Cancelar</button>
-                <button class="btn btn-danger" id="confirm-delete">Eliminar</button>
-            </div>
-        </div>
-    </div>
+    <!-- Scripts -->
     <script src="js/script.js"></script>
-    <script src="js/ejercicios.js"></script>
+    <script src="js/clientes.js"></script>
 
     <script>
         // Listeners para filtros
-        document.getElementById('filter-muscle').addEventListener('change', () => {
+        document.getElementById('filter-experience').addEventListener('change', () => {
             const term = document.getElementById('search-input').value;
-            filterExercises(term);
+            filterClients(term);
         });
 
-        document.getElementById('filter-equipment').addEventListener('change', () => {
+        document.getElementById('filter-status').addEventListener('change', () => {
             const term = document.getElementById('search-input').value;
-            filterExercises(term);
+            filterClients(term);
         });
     </script>
 </body>
