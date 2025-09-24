@@ -3,58 +3,94 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TRAINING! - Nuevo Ejercicio</title>
+    <title>TRAINING! - Gestión de Ejercicio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="css/ejercicios.css" />
+    <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components/sidebar.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/ejercicios.css" />
+    <style>
+        /* Estilos específicos para la página de agregar/editar ejercicio */
+        .image-upload-container {
+            margin-top: 20px;
+            border: 2px dashed var(--card-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: var(--transition-normal);
+            cursor: pointer;
+        }
+        
+        .image-upload-container:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(50, 205, 50, 0.05);
+        }
+        
+        .image-upload-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .image-preview {
+            margin-top: var(--spacing-md);
+            display: none;
+            position: relative;
+            max-width: 300px;
+        }
+        
+        .image-preview img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--card-border);
+        }
+        
+        .remove-image-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(220, 53, 69, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: flex-end;
+            margin-top: var(--spacing-lg);
+        }
+    </style>
 </head>
 <body>
-    <!-- Menú Lateral -->
-    <aside class="sidebar">
-        <div class="app-name">
-            <h1>TRAINING!</h1>
-        </div>
-        <div class="menu-section-title">Menú</div>
-        <div class="menu-items">
-            <a href="index.html" class="menu-item">
-                <i class="fas fa-home"></i><span>Inicio</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-users"></i><span>Clientes</span>
-            </a>
-            <a href="ejercicios.html" class="menu-item">
-                <i class="fas fa-dumbbell"></i><span>Ejercicios</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-clipboard-list"></i><span>Rutinas</span>
-            </a>
-        </div>
-    </aside>
+    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
 
-    <!-- Contenido principal -->
+    <!-- Contenido Principal -->
     <main class="main-content">
-        <div class="header">
-            <div class="user-profile">
-                <div class="user-avatar">JD</div>
-                <div>
-                    <h4>Juan Delgado</h4>
-                    <p>Entrenador certificado</p>
-                </div>
-            </div>
-        </div>
+        <!-- El header se insertará aquí -->
 
         <!-- Formulario de Ejercicio -->
         <div class="form-section">
             <div class="section-header">
-                <h2 class="section-title">Crear Nuevo Ejercicio</h2>
+                <h2 class="section-title" id="form-title">Crear Nuevo Ejercicio</h2>
                 <a href="ejercicios.html" class="btn btn-white">
-                    <i class="fas fa-times"></i> Cancelar
+                    <i class="fas fa-arrow-left"></i> Volver a Ejercicios
                 </a>
             </div>
 
-            <form id="exercise-form" class="exercise-form">
+            <form id="exercise-form" class="exercise-form" enctype="multipart/form-data">
+                <input type="hidden" id="exercise-id" value="">
+                
                 <div class="form-group">
                     <label for="exercise-name">Nombre del Ejercicio *</label>
                     <input type="text" id="exercise-name" placeholder="Ej: Sentadilla" required />
@@ -92,15 +128,39 @@
                     <textarea id="exercise-description" rows="4" placeholder="Describe el ejercicio, técnica, precauciones..."></textarea>
                 </div>
 
+                <div class="form-group">
+                    <label for="exercise-image">Imagen del Ejercicio</label>
+                    <div class="image-upload-container" id="image-upload-area">
+                        <div class="image-upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <p>Haz clic o arrastra una imagen aquí</p>
+                        <p class="text-secondary">Formatos: JPG, PNG, GIF. Tamaño máximo: 2MB</p>
+                        <input type="file" id="exercise-image" accept="image/*" style="display: none;" />
+                    </div>
+                    <div class="image-preview" id="image-preview">
+                        <img id="preview-img" src="" alt="Vista previa de la imagen" />
+                        <button type="button" class="remove-image-btn" id="remove-image">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="form-actions">
+                    <button type="button" class="btn btn-white" id="cancel-btn">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
                     <button type="submit" class="btn btn-save">
-                        <i class="fas fa-save"></i> Guardar Ejercicio
+                        <i class="fas fa-save"></i> <span id="submit-text">Guardar Ejercicio</span>
                     </button>
                 </div>
             </form>
         </div>
     </main>
 
+    <script src="js/components/sidebar.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/nuevo-ejercicio.js"></script>
 </body>
 </html>

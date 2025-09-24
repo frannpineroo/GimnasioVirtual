@@ -7,62 +7,71 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="css/components/sidebar.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
     <link rel="stylesheet" href="css/clientes.css" />
 </head>
 <body>
-    <!-- Menú Lateral -->
-    <aside class="sidebar">
-        <div class="app-name"><h1>TRAINING!</h1></div>
-        <div class="menu-section-title">Menú</div>
-        <div class="menu-items">
-            <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Inicio</span></a>
-            <a href="clientes.html" class="menu-item"><i class="fas fa-users"></i><span>Clientes</span></a>
-            <a href="ejercicios.html" class="menu-item active"><i class="fas fa-dumbbell"></i><span>Ejercicios</span></a>
-            <a href="rutinas.html" class="menu-item"><i class="fas fa-clipboard-list"></i><span>Rutinas</span></a>
-        </div>
-    </aside>
+    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
 
     <!-- Contenido Principal -->
     <main class="main-content">
-        <div class="header">
-            <div class="user-profile">
-                <div class="user-avatar">JD</div>
-                <div>
-                    <h4>Juan Delgado</h4>
-                    <p>Entrenador certificado</p>
-                </div>
-            </div>
-            <div class="search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar cliente..." id="search-input" />
-            </div>
-        </div>
+        <!-- El header se insertará aquí -->
 
         <!-- Sección de Clientes -->
         <div class="clients-section">
             <div class="section-header">
                 <h2 class="section-title">Gestión de Clientes</h2>
-                <a href="nuevo-cliente.html" class="btn btn-white">
-                    <i class="fas fa-plus"></i> Agregar Cliente
-                </a>
+                <button class="btn btn-white" id="add-client-btn">
+                    <i class="fas fa-plus"></i> Nuevo Cliente
+                </button>
             </div>
 
             <!-- Filtros -->
-            <div class="filters" style="margin-bottom: 15px;">
-                <select id="filter-experience" class="filter-select">
-                    <option value="">Experiencia</option>
-                    <option value="beginner">Principiante</option>
-                    <option value="intermediate">Intermedio</option>
-                    <option value="advanced">Avanzado</option>
-                </select>
+            <div class="filters">
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-filter"></i> Estado</label>
+                    <div class="custom-select" id="status-select">
+                        <div class="select-trigger">
+                            <div class="selected-value">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los estados</span>
+                            </div>
+                        </div>
+                        <div class="select-options">
+                            <div class="select-option status-option" data-value="">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los estados</span>
+                            </div>
+                            <div class="select-option status-option" data-value="activo">
+                                <i class="fas fa-user-check"></i>
+                                <span>Activo</span>
+                            </div>
+                            <div class="select-option status-option" data-value="inactivo">
+                                <i class="fas fa-user-clock"></i>
+                                <span>Inactivo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <select id="filter-status" class="filter-select">
-                    <option value="">Estado</option>
-                    <option value="active">Activo</option>
-                    <option value="inactive">Inactivo</option>
-                </select>
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-search"></i> Buscar</label>
+                    <div class="search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar cliente..." id="search-input" />
+                    </div>
+                </div>
+
+                <!-- Botón para resetear filtros -->
+                <div class="filter-group">
+                    <label class="filter-label" style="opacity: 0;">Acciones</label>
+                    <button id="reset-filters" class="btn btn-white">
+                        <i class="fas fa-sync-alt"></i> Resetear Filtros
+                    </button>
+                </div>
             </div>
 
             <!-- Tabla de Clientes -->
@@ -71,15 +80,17 @@
                     <thead>
                         <tr>
                             <th>Nombre</th>
+                            <th>DNI</th>
                             <th>Experiencia</th>
                             <th>Objetivo</th>
                             <th>Lesiones</th>
                             <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="clients-table-body">
                         <tr id="loading-row">
-                            <td colspan="5" style="text-align:center; padding: 30px;">
+                            <td colspan="7" style="text-align:center; padding: 30px;">
                                 <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando clientes...
                             </td>
                         </tr>
@@ -89,21 +100,73 @@
         </div>
     </main>
 
-    <!-- Scripts -->
-    <script src="js/script.js"></script>
+    <!-- Modal para agregar/editar cliente -->
+    <div class="modal" id="client-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Nuevo Cliente</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <form id="client-form" class="client-form">
+                <input type="hidden" id="client-id" value="">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="client-name">Nombre completo *</label>
+                        <input type="text" id="client-name" placeholder="Ej: Juan Pérez" required />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-dni">DNI *</label>
+                        <input type="text" id="client-dni" placeholder="Ej: 12345678A" required />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="client-experience">Experiencia previa</label>
+                    <textarea id="client-experience" rows="2" placeholder="Describa la experiencia previa del cliente en entrenamiento..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="client-goal">Objetivo *</label>
+                    <select id="client-goal" required>
+                        <option value="">Selecciona un objetivo</option>
+                        <option value="perdida_grasa">Pérdida de grasa</option>
+                        <option value="ganancia_muscular">Ganancia muscular</option>
+                        <option value="mejora_rendimiento">Mejora de rendimiento</option>
+                        <option value="rehabilitacion">Rehabilitación</option>
+                        <option value="mantenimiento">Mantenimiento</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="client-injuries">Lesiones o condiciones médicas</label>
+                    <textarea id="client-injuries" rows="2" placeholder="Describa lesiones o condiciones médicas relevantes..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="client-status">Estado *</label>
+                    <select id="client-status" required>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-white" id="cancel-form">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-save">
+                        <i class="fas fa-save"></i> <span id="submit-text">Guardar Cliente</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/components/sidebar.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/clientes.js"></script>
-
-    <script>
-        // Listeners para filtros
-        document.getElementById('filter-experience').addEventListener('change', () => {
-            const term = document.getElementById('search-input').value;
-            filterClients(term);
-        });
-
-        document.getElementById('filter-status').addEventListener('change', () => {
-            const term = document.getElementById('search-input').value;
-            filterClients(term);
-        });
-    </script>
 </body>
 </html>

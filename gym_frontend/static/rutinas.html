@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAINING! - Rutinas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/components/sidebar.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/rutinas.css" />
+</head>
+<body>
+    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <!-- El header se insertará aquí -->
+
+        <!-- Sección de Rutinas -->
+        <div class="routines-section">
+            <div class="section-header">
+                <h2 class="section-title">Gestión de Rutinas</h2>
+                <button class="btn btn-white" id="add-routine-btn">
+                    <i class="fas fa-plus"></i> Nueva Rutina
+                </button>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-filter"></i> Cliente</label>
+                    <div class="custom-select" id="client-select">
+                        <div class="select-trigger">
+                            <div class="selected-value">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los clientes</span>
+                            </div>
+                        </div>
+                        <div class="select-options">
+                            <div class="select-option client-option" data-value="">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los clientes</span>
+                            </div>
+                            <div class="select-option client-option" data-value="1">
+                                <i class="fas fa-user"></i>
+                                <span>Juan Pérez</span>
+                            </div>
+                            <div class="select-option client-option" data-value="2">
+                                <i class="fas fa-user"></i>
+                                <span>María García</span>
+                            </div>
+                            <div class="select-option client-option" data-value="3">
+                                <i class="fas fa-user"></i>
+                                <span>Carlos López</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-search"></i> Buscar</label>
+                    <div class="search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar rutina..." id="search-input" />
+                    </div>
+                </div>
+
+                <!-- Botón para resetear filtros -->
+                <div class="filter-group">
+                    <label class="filter-label" style="opacity: 0;">Acciones</label>
+                    <button id="reset-filters" class="btn btn-white">
+                        <i class="fas fa-sync-alt"></i> Resetear Filtros
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Rutinas -->
+            <div class="routines-table-container">
+                <table class="routines-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Cliente</th>
+                            <th>Ejercicios</th>
+                            <th>Fecha creación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="routines-table-body">
+                        <tr>
+                            <td>Rutina fuerza inicial</td>
+                            <td>Rutina para principiantes enfocada en fuerza general</td>
+                            <td>Juan Pérez</td>
+                            <td>8 ejercicios</td>
+                            <td>15/05/2023</td>
+                            <td class="actions-cell">
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rutina volumen</td>
+                            <td>Rutina para ganancia muscular con enfoque en hipertrofia</td>
+                            <td>María García</td>
+                            <td>10 ejercicios</td>
+                            <td>22/06/2023</td>
+                            <td class="actions-cell">
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Rutina definición</td>
+                            <td>Rutina para pérdida de grasa y definición muscular</td>
+                            <td>Carlos López</td>
+                            <td>9 ejercicios</td>
+                            <td>10/07/2023</td>
+                            <td class="actions-cell">
+                                <button class="action-btn view-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn edit-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete-btn"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para visualizar rutina -->
+    <div class="modal" id="view-routine-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Rutina fuerza inicial</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="routine-details">
+                <div class="routine-info">
+                    <h3>Información de la rutina</h3>
+                    <p><strong>Cliente:</strong> Juan Pérez</p>
+                    <p><strong>Descripción:</strong> Rutina para principiantes enfocada en fuerza general</p>
+                    <p><strong>Fecha creación:</strong> 15/05/2023</p>
+                </div>
+                
+                <h3>Ejercicios</h3>
+                <div class="exercises-list">
+                    <!-- Ejercicio 1 -->
+                    <div class="exercise-item">
+                        <img src="https://via.placeholder.com/80" alt="Press banca" class="exercise-image">
+                        <div class="exercise-details">
+                            <h4 class="exercise-name">Press de banca</h4>
+                            <div class="exercise-meta">
+                                <span><i class="fas fa-sync-alt"></i> 4 series</span>
+                                <span><i class="fas fa-redo"></i> 8-10 repeticiones</span>
+                                <span><i class="fas fa-clock"></i> 90s descanso</span>
+                            </div>
+                            <p class="exercise-description">Ejercicio básico para el desarrollo del pectoral. Acostado en un banco plano, bajar la barra al pecho y empujar hacia arriba.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Ejercicio 2 -->
+                    <div class="exercise-item">
+                        <img src="https://via.placeholder.com/80" alt="Sentadillas" class="exercise-image">
+                        <div class="exercise-details">
+                            <h4 class="exercise-name">Sentadillas</h4>
+                            <div class="exercise-meta">
+                                <span><i class="fas fa-sync-alt"></i> 4 series</span>
+                                <span><i class="fas fa-redo"></i> 10-12 repeticiones</span>
+                                <span><i class="fas fa-clock"></i> 120s descanso</span>
+                            </div>
+                            <p class="exercise-description">Ejercicio fundamental para el desarrollo de piernas y glúteos. Mantener la espalda recta y bajar hasta que los muslos estén paralelos al suelo.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Ejercicio 3 -->
+                    <div class="exercise-item">
+                        <img src="https://via.placeholder.com/80" alt="Dominadas" class="exercise-image">
+                        <div class="exercise-details">
+                            <h4 class="exercise-name">Dominadas</h4>
+                            <div class="exercise-meta">
+                                <span><i class="fas fa-sync-alt"></i> 3 series</span>
+                                <span><i class="fas fa-redo"></i> 6-8 repeticiones</span>
+                                <span><i class="fas fa-clock"></i> 90s descanso</span>
+                            </div>
+                            <p class="exercise-description">Ejercicio para espalda y brazos. Colgarse de una barra y elevar el cuerpo hasta que la barbilla supere la barra.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/components/sidebar.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/rutinas.js"></script>
+</body>
+</html>

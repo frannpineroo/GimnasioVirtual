@@ -7,38 +7,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="css/components/sidebar.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
     <link rel="stylesheet" href="css/ejercicios.css" />
 </head>
 <body>
-    <!-- Menú Lateral -->
-    <aside class="sidebar">
-        <div class="app-name"><h1>TRAINING!</h1></div>
-        <div class="menu-section-title">Menú</div>
-        <div class="menu-items">
-            <a href="index.html" class="menu-item"><i class="fas fa-home"></i><span>Inicio</span></a>
-            <a href="clientes.html" class="menu-item"><i class="fas fa-users"></i><span>Clientes</span></a>
-            <a href="ejercicios.html" class="menu-item active"><i class="fas fa-dumbbell"></i><span>Ejercicios</span></a>
-            <a href="rutinas.html" class="menu-item"><i class="fas fa-clipboard-list"></i><span>Rutinas</span></a>
-        </div>
-    </aside>
+    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
 
     <!-- Contenido Principal -->
     <main class="main-content">
-        <div class="header">
-            <div class="user-profile">
-                <div class="user-avatar">JD</div>
-                <div>
-                    <h4>Juan Delgado</h4>
-                    <p>Entrenador certificado</p>
-                </div>
-            </div>
-            <div class="search">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar ejercicio..." id="search-input" />
-            </div>
-        </div>
+        <!-- El header se insertará aquí -->
 
         <!-- Sección de Ejercicios -->
         <div class="exercises-section">
@@ -50,27 +30,102 @@
             </div>
 
             <!-- Filtros -->
-            <div class="filters" style="margin-bottom: 15px;">
-                <select id="filter-muscle" class="filter-select">
-                    <option value="">Grupo Muscular</option>
-                    <option value="pectorales">Pectorales</option>
-                    <option value="espalda">Espalda</option>
-                    <option value="hombros">Hombros</option>
-                    <option value="biceps">Bíceps</option>
-                    <option value="triceps">Tríceps</option>
-                    <option value="piernas">Piernas</option>
-                    <option value="abdominales">Abdominales</option>
-                </select>
+            <div class="filters">
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-running"></i> Grupo Muscular</label>
+                    <div class="custom-select" id="muscle-select">
+                        <div class="select-trigger">
+                            <div class="selected-value">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los grupos</span>
+                            </div>
+                        </div>
+                        <div class="select-options">
+                            <div class="select-option muscle-option" data-value="">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los grupos</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="pectorales">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Pectorales</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="espalda">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Espalda</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="hombros">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Hombros</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="biceps">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Bíceps</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="triceps">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Tríceps</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="piernas">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Piernas</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="abdominales">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Abdominales</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <select id="filter-equipment" class="filter-select">
-                    <option value="">Elemento</option>
-                    <option value="mancuerna">Mancuerna</option>
-                    <option value="barra">Barra</option>
-                    <option value="polea">Polea</option>
-                    <option value="maquina">Máquina</option>
-                    <option value="peso corporal">Peso Corporal</option>
-                    <option value="banda">Banda Elástica</option>
-                </select>
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-dumbbell"></i> Elemento</label>
+                    <div class="custom-select" id="equipment-select">
+                        <div class="select-trigger">
+                            <div class="selected-value">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los elementos</span>
+                            </div>
+                        </div>
+                        <div class="select-options">
+                            <div class="select-option equipment-option" data-value="">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los elementos</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="mancuerna">
+                                <i class="fas fa-dumbbell"></i>
+                                <span>Mancuerna</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="barra">
+                                <i class="fas fa-grip-lines"></i>
+                                <span>Barra</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="polea">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Polea</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="maquina">
+                                <i class="fas fa-cogs"></i>
+                                <span>Máquina</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="peso corporal">
+                                <i class="fas fa-user"></i>
+                                <span>Peso Corporal</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="banda">
+                                <i class="fas fa-ring"></i>
+                                <span>Banda Elástica</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón para resetear filtros -->
+                <div class="filter-group">
+                    <label class="filter-label" style="opacity: 0;">Acciones</label>
+                    <button id="reset-filters" class="btn btn-white">
+                        <i class="fas fa-sync-alt"></i> Resetear Filtros
+                    </button>
+                </div>
             </div>
 
             <!-- Tabla de Ejercicios -->
@@ -97,31 +152,9 @@
         </div>
     </main>
 
-    Modal de Eliminación
-    <div class="modal" id="delete-modal">
-        <div class="modal-content">
-            <h2>Confirmar Eliminación</h2>
-            <p>¿Estás seguro de que deseas eliminar este ejercicio? Esta acción no se puede deshacer.</p>
-            <div class="modal-actions">
-                <button class="btn btn-white" id="cancel-delete">Cancelar</button>
-                <button class="btn btn-danger" id="confirm-delete">Eliminar</button>
-            </div>
-        </div>
-    </div>
-    <script src="js/script.js"></script>
+    <script src="js/components/sidebar.js"></script>
+    <script src="js/components/header.js"></script>
+    <script src="js/main.js"></script>
     <script src="js/ejercicios.js"></script>
-
-    <script>
-        // Listeners para filtros
-        document.getElementById('filter-muscle').addEventListener('change', () => {
-            const term = document.getElementById('search-input').value;
-            filterExercises(term);
-        });
-
-        document.getElementById('filter-equipment').addEventListener('change', () => {
-            const term = document.getElementById('search-input').value;
-            filterExercises(term);
-        });
-    </script>
 </body>
 </html>
