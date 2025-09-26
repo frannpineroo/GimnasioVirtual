@@ -11,27 +11,7 @@
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <!-- Menú Lateral -->
-    <aside class="sidebar">
-        <div class="app-name">
-            <h1>TRAINING!</h1>
-        </div>
-        <div class="menu-section-title">Menú</div>
-        <div class="menu-items">
-            <a href="index.html" class="menu-item">
-                <i class="fas fa-home"></i><span>Inicio</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-users"></i><span>Clientes</span>
-            </a>
-            <a href="ejercicios.html" class="menu-item">
-                <i class="fas fa-dumbbell"></i><span>Ejercicios</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-clipboard-list"></i><span>Rutinas</span>
-            </a>
-        </div>
-    </aside>
+    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
 
     <!-- Contenido principal -->
     <main class="main-content">
@@ -45,32 +25,28 @@
             </div>
         </div>
 
-        <!-- Formulario de Ejercicio -->
+        <!-- Formulario de Cliente -->
         <div class="form-section">
             <div class="section-header">
-                <h2 class="section-title">Crear Nuevo Ejercicio</h2>
-                <a href="ejercicios.html" class="btn btn-white">
+                <h2 class="section-title">Crear Nuevo Cliente</h2>
+                <a href="clientes.html" class="btn btn-white">
                     <i class="fas fa-times"></i> Cancelar
                 </a>
             </div>
 
-            <form id="exercise-form" class="exercise-form">
+            <form id="client-form" class="client-form">
                 <div class="form-group">
-                    <label for="exercise-name">Nombre del Ejercicio *</label>
-                    <input type="text" id="exercise-name" placeholder="Ej: Sentadilla" required />
+                    <label for="user-name">Nombre del Cliente *</label>
+                    <input type="text" id="user-name" placeholder="Ej: Tomás Gómez" required />
                 </div>
 
                 <div class="form-group">
-                    <label for="muscle-group">Grupo Muscular *</label>
-                    <select id="muscle-group" required>
-                        <option value="">Selecciona un grupo muscular</option>
-                        <option value="pectorales">Pectorales</option>
-                        <option value="espalda">Espalda</option>
-                        <option value="hombros">Hombros</option>
-                        <option value="biceps">Bíceps</option>
-                        <option value="triceps">Tríceps</option>
-                        <option value="piernas">Piernas</option>
-                        <option value="abdominales">Abdominales</option>
+                    <label for="experience_level">Nivel de Experiencia *</label>
+                    <select id="experience_level" required>
+                        <option value="">Selecciona un Nivel</option>
+                        <option value="beginner">Principiante</option>
+                        <option value="intermediate">Intermedio</option>
+                        <option value="advanced">Avanzado</option>
                     </select>
                 </div>
 

@@ -1,8 +1,8 @@
 // LÓGICA ESPECÍFICA PARA LA PÁGINA DE EJERCICIOS
 
 // Variables globales
-let currentExerciseId = null;
-let allExercises = [];
+let currentClientId = null;
+let allClients = [];
 
 // Función para capitalizar la primera letra 
 function capitalizeFirstLetter(string) {
@@ -13,114 +13,110 @@ function capitalizeFirstLetter(string) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    getExercises();
+    getClients();
 
     document.getElementById('search-input').addEventListener('input', function () {
-        filterExercises(this.value);
+        filterClients(this.value);
     });
 
     document.getElementById('confirm-delete').addEventListener('click', function () {
-        if (currentExerciseId) {
-            deleteExercise(currentExerciseId);
+        if (currentClientId) {
+            deleteExercise(currentClientId);
         }
     });
 
     document.getElementById('cancel-delete').addEventListener('click', closeModals);
 });
 
-// GET: Obtener todos los ejercicios
-function getExercises() {
-    fetch('http://localhost:8000/api/ejercicios/') 
+// GET: Obtener todos los clientes
+function getClients() {
+    fetch('http://localhost:8000/api/clientes/') 
         .then(response => response.json())
         .then(data => {
-            console.log('Datos recibidos de la API:', data);
-            if (data.length > 0) {
-                console.log('Primer ejercicio:', data[0]);
-            }
-            allExercises = data;
-            renderExercisesTable(allExercises);
+            allClients = data;
+            renderClientsTable(allClients);
         })
         .catch(error => {
-            console.error('Error al cargar ejercicios:', error);
+            console.error('Error al cargar los clientes:', error);
         });
 }
 
-// POST: Crear un nuevo ejercicio
-function createExercise(exerciseData) {
-    console.log("Datos enviados:", exerciseData);
-    fetch('http://localhost:8000/api/ejercicios/', { 
+// POST: Crear un nuevo cliente
+function createClient(clienteData) {
+    console.log("Datos enviados:", clienteData);
+    fetch('http://localhost:8000/api/clientes/', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(exerciseData)
+        body: JSON.stringify(clienteData)
     })
     .then(response => {
         console.log("Status:", response.status);
         if (!response.ok) {
             return response.text().then(text => {  
                 console.log("Error response:", text);
-                throw new Error('No se pudo crear el ejercicio');
+                throw new Error('No se pudo crear el cliente');
             });
         }
         return response.json();
     })
     .then(data => {
-        getExercises();
+        getClients();
     })
     .catch(error => {
-        console.error('Error al crear ejercicio:', error);
+        console.error('Error al crear el cliente:', error);
     });
 }
 
-// PUT: Actualizar un ejercicio existente
-function updateExercise(id, exerciseData) {
-    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {  
+// PUT: Actualizar un cliente existente
+function updateExercise(id, clienteData) {
+    fetch(`http://localhost:8000/api/clientes/${id}/`, {  
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(exerciseData)
+        body: JSON.stringify(clienteData)
     })
     .then(response => {
-        if (!response.ok) throw new Error('No se pudo actualizar el ejercicio');
+        if (!response.ok) throw new Error('No se pudo actualizar el cliente');
         return response.json();
     })
     .then(data => {
-        getExercises();
+        getClients();
     })
     .catch(error => {
-        console.error('Error al actualizar ejercicio:', error);
+        console.error('Error al actualizar el cliente:', error);
     });
 }
 
-// DELETE: Eliminar un ejercicio
-function deleteExercise(id) {
-    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {  
+// DELETE: Eliminar un cliente
+function deleteClient(id) {
+    fetch(`http://localhost:8000/api/clientes/${id}/`, {  
         method: 'DELETE'
     })
     .then(response => {
-        if (!response.ok) throw new Error('No se pudo eliminar el ejercicio');
+        if (!response.ok) throw new Error('No se pudo eliminar el cliente');
         closeModals();
-        getExercises();
+        getClients();
     })
     .catch(error => {
-        console.error('Error al eliminar ejercicio:', error);
+        console.error('Error al eliminar cliente:', error);
     });
 }
 
-function renderExercisesTable(exercises) {
-    const tbody = document.getElementById('exercises-table-body');
+function renderClientsTable(clients) {
+    const tbody = document.getElementById('clients-table-body');
 
-    if (!exercises.length) {
+    if (!clients.length) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="5" style="text-align: center; padding: 30px;">
                     <i class="fas fa-dumbbell" style="font-size: 48px; color: #32CD32; margin-bottom: 15px;"></i>
-                    <h3>No hay ejercicios registrados</h3>
-                    <p>Comienza agregando tu primer ejercicio</p>
-                    <a href="nuevo-ejercicio.html" class="btn btn-white" style="margin-top: 15px;">
-                        <i class="fas fa-plus"></i> Agregar primer ejercicio
+                    <h3>No hay clientes registrados</h3>
+                    <p>Comienza creando tu primer cliente</p>
+                    <a href="nuevo-cliente.html" class="btn btn-white" style="margin-top: 15px;">
+                        <i class="fas fa-plus"></i> Agregar primer cliente
                     </a>
                 </td>
             </tr>
@@ -128,17 +124,18 @@ function renderExercisesTable(exercises) {
         return;
     }
 
-    tbody.innerHTML = exercises.map(exercise => `
+    tbody.innerHTML = clients.map(client => `
         <tr>
-            <td>${exercise.name || '-'}</td>
-            <td>${capitalizeFirstLetter(exercise.muscle_group)}</td>
-            <td>${capitalizeFirstLetter(exercise.equipment)}</td>
-            <td>${exercise.description || '-'}</td>
+            <td>${client.user || '-'}</td>
+            <td>${capitalizeFirstLetter(client.experience_level)}</td>
+            <td>${capitalizeFirstLetter(client.goal)}</td>
+            <td>${client.injuries || '-'}</td>
+            <td>${client.status || '-'}</td>
             <td class="actions-cell">
-                <a href="nuevo-ejercicio.html?id=${exercise.id}" class="action-btn edit-btn" title="Editar ejercicio">
+                <a href="nuevo-ejercicio.html?id=${client.id}" class="action-btn edit-btn" title="Editar cliente">
                     <i class="fas fa-pen"></i>
                 </a>
-                <button class="action-btn delete-btn" data-id="${exercise.id}" title="Eliminar ejercicio">
+                <button class="action-btn delete-btn" data-id="${client.id}" title="Eliminar cliente">
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
@@ -147,21 +144,22 @@ function renderExercisesTable(exercises) {
 
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', function () {
-            currentExerciseId = parseInt(this.dataset.id);
+            currentClientId = parseInt(this.dataset.id);
             showDeleteModal();
         });
     });
 }
 
-function filterExercises(searchTerm) {
+function filterClients(searchTerm) {
     const term = searchTerm.toLowerCase();
-    const filtered = allExercises.filter(e =>
-        (e.name && e.name.toLowerCase().includes(term)) ||
-        (e.muscle_group && e.muscle_group.toLowerCase().includes(term)) ||
-        (e.equipment && e.equipment.toLowerCase().includes(term)) ||
-        (e.description && e.description.toLowerCase().includes(term))
+    const filtered = allClients.filter(e =>
+        (e.user && e.user.toLowerCase().includes(term)) ||
+        (e.experience_level && e.experience_level.toLowerCase().includes(term)) ||
+        (e.goal && e.goal.toLowerCase().includes(term)) ||
+        (e.injuries && e.injuries.toLowerCase().includes(term))
+        (e.status && e.status.toLowerCase().includes(term))
     );
-    renderExercisesTable(filtered);
+    renderClientsTable(filtered);
 }
 
 function showDeleteModal() {

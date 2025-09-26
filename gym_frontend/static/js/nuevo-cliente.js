@@ -1,52 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('exercise-form');
+    const form = document.getElementById('client-form');
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const name = document.getElementById('exercise-name').value.trim();
-        const muscleGroup = document.getElementById('muscle-group').value;
-        const equipment = document.getElementById('exercise-equipment').value;
-        const description = document.getElementById('exercise-description').value.trim();
+        const user = document.getElementById('user-name').value.trim();
+        const experienceLevel = document.getElementById('experience_level').value;
+        const goal = document.getElementById('goal').value;
+        const injuries = document.getElementById('injuries').value.trim();
+        const status = document.getElementById('status').value;
 
-        // DEBUG: Imprimir todos los valores obtenidos
-        console.log('=== VALORES DEL FORMULARIO ===');
-        console.log('Nombre:', name);
-        console.log('Grupo muscular:', muscleGroup);
-        console.log('Equipo:', equipment);
-        console.log('Descripción:', description);
-        console.log('================================');
-
-        // Validación mejorada
-        if (!name || !muscleGroup || !equipment) {
-            alert('Por favor completa los campos requeridos (*)');
-            console.log('Validación falló:');
-            console.log('- Nombre válido:', !!name);
-            console.log('- Grupo muscular válido:', !!muscleGroup);
-            console.log('- Equipo válido:', !!equipment);
-            return;
-        }
-
-        // Verificar que muscle_group no esté vacío
-        if (muscleGroup === "" || muscleGroup === null || muscleGroup === undefined) {
-            alert('Por favor selecciona un grupo muscular válido');
-            console.error('Grupo muscular inválido:', muscleGroup);
-            return;
-        }
-
-        const exerciseData = {
-            name: name,
-            muscle_group: muscleGroup,
-            equipment: equipment,
-            description: description || ""
+        const clienteData = {
+            user: user,
+            experience_level: experienceLevel,
+            goal: goal,
+            injuries: injuries || "",
+            status: status
         };
 
-        console.log('=== DATOS A ENVIAR ===');
-        console.log('Objeto completo:', exerciseData);
-        console.log('JSON:', JSON.stringify(exerciseData));
-        console.log('====================');
-
-        fetch('http://localhost:8000/api/ejercicios/', {
+        fetch('http://localhost:8000/api/clientes/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -68,18 +40,18 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(data => {
-            console.log('=== EJERCICIO CREADO ===');
+            console.log('=== CLIENTE CREADO ===');
             console.log('Respuesta:', data);
             console.log('=======================');
             
-            alert('Ejercicio guardado exitosamente!');
-            window.location.href = 'ejercicios.html';
+            alert('Cliente guardado exitosamente!');
+            window.location.href = 'clientes.html';
         })
         .catch(error => {
             console.error('=== ERROR ===');
             console.error('Error completo:', error);
             console.error('=============');
-            alert('Ocurrió un problema al guardar el ejercicio: ' + error.message);
+            alert('Ocurrió un problema al guardar el nuevo cliente: ' + error.message);
         });
     });
 });
