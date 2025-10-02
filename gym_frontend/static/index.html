@@ -16,6 +16,8 @@
     <!-- Contenido Principal -->
     <main class="main-content">
         <!-- El header se insertará aquí -->
+        <!-- El sidebar se insertará aquí -->
+        <div id="sidebar-container"></div>
 
         <div class="welcome-section">
             <h2>Bienvenido al Panel de Control</h2>
@@ -73,5 +75,13 @@
     <script src="js/components/sidebar.js"></script>
     <script src="js/components/header.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Cargar el sidebar
+        fetch('components/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            });
+    </script>
 </body>
 </html>
