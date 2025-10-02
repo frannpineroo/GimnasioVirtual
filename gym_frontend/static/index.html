@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/components/sidebar.css" />
-    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
 </head>
 <body>
     <!-- Contenido Principal -->
     <main class="main-content">
         <!-- El header se insertará aquí -->
+        <div id="header-container"></div>
         <!-- El sidebar se insertará aquí -->
         <div id="sidebar-container"></div>
 
@@ -75,6 +77,14 @@
     <script src="js/components/sidebar.js"></script>
     <script src="js/components/header.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        // Cargar el header
+        fetch('components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            });
+    </script>
     <script>
         // Cargar el sidebar
         fetch('components/sidebar.html')
