@@ -7,6 +7,8 @@
 
 body {
     display: flex;
+    margin: 0;
+    padding: 0;
     background-color: var(--dark-bg);
     color: var(--text-primary);
     font-family: var(--font-family);
@@ -19,6 +21,7 @@ body {
 .main-content {
     flex: 1;
     margin-left: 280px;
+    min-height: 100vh;
     padding: var(--spacing-xl);
 }
 
