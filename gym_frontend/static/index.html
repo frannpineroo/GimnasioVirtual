@@ -14,13 +14,14 @@
     <link rel="stylesheet" href="css/sidebar.css" />
 </head>
 <body>
+    <!-- El header se insertará aquí -->
+    <div id="header-container"></div>
+    
+    <!-- El sidebar se insertará aquí -->
+    <div id="sidebar-container"></div>
+
     <!-- Contenido Principal -->
     <main class="main-content">
-        <!-- El header se insertará aquí -->
-        <div id="header-container"></div>
-        <!-- El sidebar se insertará aquí -->
-        <div id="sidebar-container"></div>
-
         <div class="welcome-section">
             <h2>Bienvenido al Panel de Control</h2>
             <p>Gestiona tus clientes, ejercicios y rutinas de entrenamiento de manera eficiente con nuestra plataforma.</p>
@@ -28,25 +29,19 @@
 
         <div class="stats-container">
             <div class="stat-card">
-                <div class="icon">
-                    <i class="fas fa-users"></i>
-                </div>
+                <div class="icon"><i class="fas fa-users"></i></div>
                 <h3>24</h3>
                 <p>Clientes Activos</p>
             </div>
 
             <div class="stat-card">
-                <div class="icon">
-                    <i class="fas fa-dumbbell"></i>
-                </div>
+                <div class="icon"><i class="fas fa-dumbbell"></i></div>
                 <h3>68</h3>
                 <p>Ejercicios Disponibles</p>
             </div>
 
             <div class="stat-card">
-                <div class="icon">
-                    <i class="fas fa-clipboard-list"></i>
-                </div>
+                <div class="icon"><i class="fas fa-clipboard-list"></i></div>
                 <h3>36</h3>
                 <p>Rutinas Creadas</p>
             </div>
@@ -74,24 +69,27 @@
         </div>
     </main>
 
-    <script src="js/components/sidebar.js"></script>
-    <script src="js/components/header.js"></script>
-    <script src="js/main.js"></script>
+    <!-- SCRIPTS AL FINAL DEL BODY -->
     <script>
-        // Cargar el header
+        // Cargar componentes
         fetch('components/header.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header-container').innerHTML = data;
-            });
-    </script>
-    <script>
-        // Cargar el sidebar
+            })
+            .catch(error => console.error('Error cargando header:', error));
+
         fetch('components/sidebar.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('sidebar-container').innerHTML = data;
-            });
+            })
+            .catch(error => console.error('Error cargando sidebar:', error));
     </script>
+    
+    <!-- Tus otros scripts -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
