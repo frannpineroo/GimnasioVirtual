@@ -9,16 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="css/ejercicios.css" />
 </head>
 <body>
-    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
+    <!-- El header se inserta aquí -->
+    <div id="header-container"></div>
+    
+    <!-- El sidebar se inserta aquí -->
+    <div id="sidebar-container"></div>
 
     <!-- Contenido Principal -->
     <main class="main-content">
-        <!-- El header se insertará aquí -->
 
         <!-- Sección de Ejercicios -->
         <div class="exercises-section">
@@ -152,9 +155,28 @@
         </div>
     </main>
 
-    <script src="js/components/sidebar.js"></script>
-    <script src="js/components/header.js"></script>
-    <script src="js/main.js"></script>
+    <!-- Scripts para indexar sidebar y header -->
+    <script>
+        // Cargar componentes
+        fetch('components/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error cargando header:', error));
+
+        fetch('components/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error cargando sidebar:', error));
+    </script>
+    
+    <!-- otros scripts -->
+    <script src="js/sidebar.js"></script>
+    <script src="js/header.js"></script>
     <script src="js/ejercicios.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
