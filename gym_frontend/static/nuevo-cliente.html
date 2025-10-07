@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="css/ejercicios.css" />
+    <link rel="stylesheet" href="css/clientes.css" />
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
-
     <!-- Contenido principal -->
     <main class="main-content">
         <div class="header">
@@ -51,32 +49,33 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="exercise-equipment">Elemento *</label>
-                    <select id="exercise-equipment" required>
-                        <option value="">Selecciona un elemento</option>
-                        <option value="mancuerna">Mancuerna</option>
-                        <option value="barra">Barra</option>
-                        <option value="polea">Polea</option>
-                        <option value="maquina">Máquina</option>
-                        <option value="peso corporal">Peso Corporal</option>
-                        <option value="banda">Banda Elástica</option>
-                    </select>
+                    <label for="goal">Meta *</label>
+                    <textarea type="text" id="user-goal" placeholder="Ej: Musculatura" required></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="exercise-description">Descripción</label>
-                    <textarea id="exercise-description" rows="4" placeholder="Describe el ejercicio, técnica, precauciones..."></textarea>
+                    <label for="user-injuries">Lesiones</label>
+                    <textarea id="user-injuries" rows="4" placeholder="Describe las lesiones..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-status">Estado *</label>
+                    <select id="user-status" required>
+                        <option value="">Estado del Cliente</option>
+                        <option value="active">Activo</option>
+                        <option value="inactive">Inactivo</option>
+                    </select>
                 </div>
 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-save">
-                        <i class="fas fa-save"></i> Guardar Ejercicio
+                        <i class="fas fa-save"></i> Guardar Cliente
                     </button>
                 </div>
             </form>
         </div>
     </main>
 
-    <script src="js/nuevo-ejercicio.js"></script>
+    <script src="js/nuevo-cliente.js"></script>
 </body>
 </html>
