@@ -30,7 +30,11 @@ class Coach(models.Model):
         return f"Coach: {self.user.name} {self.user.last_name}"
 
 class Client(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='client')
+    name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    dni = models.CharField(max_length=20, unique=True, blank=True, null=True)
+    email = models.EmailField(unique=True, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
     experience_level = models.CharField(max_length=50, choices=[
         ('beginner', 'Beginner'),
         ('intermediate', 'Intermediate'),
@@ -42,9 +46,13 @@ class Client(models.Model):
         ('active', 'Active'),
         ('inactive', 'Inactive')
     ], default='active')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)   
     
     def __str__(self):
-        return f"Client: {self.user.name} {self.user.last_name}"
+        return f"{self.name} {self.last_name}"
+    class Meta:
+        ordering = ['-created_at']
 
 class Asignature(models.Model):
     # Corregido: usar DateField en lugar de CharField para fechas
