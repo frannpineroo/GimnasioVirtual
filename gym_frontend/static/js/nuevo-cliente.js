@@ -4,14 +4,16 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const user = document.getElementById('user-name').value.trim();
+        const userName = document.getElementById('user-name').value.trim();
+        const userLastName = document.getElementById('user-lastname').value.trim();
         const experienceLevel = document.getElementById('experience_level').value;
         const goal = document.getElementById('goal').value;
         const injuries = document.getElementById('injuries').value.trim();
         const status = document.getElementById('status').value;
 
         const clienteData = {
-            user: user,
+            name: userName,
+            last_name: userLastName,
             experience_level: experienceLevel,
             goal: goal,
             injuries: injuries || "",
