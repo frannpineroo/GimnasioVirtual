@@ -1,4 +1,4 @@
-// LÓGICA ESPECÍFICA PARA LA PÁGINA DE EJERCICIOS
+// LÓGICA ESPECÍFICA PARA LA PÁGINA DE CLIENTES
 
 // Variables globales
 let currentClientId = null;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('confirm-delete').addEventListener('click', function () {
         if (currentClientId) {
-            deleteExercise(currentClientId);
+            deleteClient(currentClientId);
         }
     });
 
