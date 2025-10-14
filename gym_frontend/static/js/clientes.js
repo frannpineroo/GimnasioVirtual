@@ -126,13 +126,15 @@ function renderClientsTable(clients) {
 
     tbody.innerHTML = clients.map(client => `
         <tr>
-            <td>${client.user || '-'}</td>
+            <td>${client.name || '-'}</td>
+            <td>${client.last_name || '-'}</td>
+            <td>${client.dni || '-'}</td>
             <td>${capitalizeFirstLetter(client.experience_level)}</td>
             <td>${capitalizeFirstLetter(client.goal)}</td>
             <td>${client.injuries || '-'}</td>
             <td>${client.status || '-'}</td>
             <td class="actions-cell">
-                <a href="nuevo-ejercicio.html?id=${client.id}" class="action-btn edit-btn" title="Editar cliente">
+                <a href="nuevo-cliente.html?id=${client.id}" class="action-btn edit-btn" title="Editar cliente">
                     <i class="fas fa-pen"></i>
                 </a>
                 <button class="action-btn delete-btn" data-id="${client.id}" title="Eliminar cliente">
@@ -153,7 +155,8 @@ function renderClientsTable(clients) {
 function filterClients(searchTerm) {
     const term = searchTerm.toLowerCase();
     const filtered = allClients.filter(e =>
-        (e.user && e.user.toLowerCase().includes(term)) ||
+        (e.name && e.name.toLowerCase().includes(term)) ||
+        (e.last_name && e.last_name.toLowerCase().includes(term)) ||
         (e.experience_level && e.experience_level.toLowerCase().includes(term)) ||
         (e.goal && e.goal.toLowerCase().includes(term)) ||
         (e.injuries && e.injuries.toLowerCase().includes(term))
