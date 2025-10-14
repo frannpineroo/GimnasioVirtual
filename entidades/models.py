@@ -55,7 +55,6 @@ class Client(models.Model):
         ordering = ['-created_at']
 
 class Asignature(models.Model):
-    # Corregido: usar DateField en lugar de CharField para fechas
     start_date = models.DateField()
     end_date = models.DateField()
     active = models.BooleanField(default=True)
@@ -87,9 +86,7 @@ class TrainingSession(models.Model):
 class Rutine(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    # Corregido: sin max_length en PositiveBigIntegerField
     time_week = models.PositiveBigIntegerField()
-    # Corregido: sin max_length en BooleanField
     is_template = models.BooleanField(default=False)
     time_creation = models.DateTimeField(auto_now_add=True)
     coach = models.ForeignKey(Coach, on_delete=models.CASCADE, related_name='routines')
@@ -132,4 +129,28 @@ class ProgressRegister(models.Model):
     def __str__(self):
         return f"Progress: {self.session} - {self.rutine_exercise}"
 
+from django.db import models
+
+class Equipment(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    category = models.CharField(max_length=50)
+    model = models.CharField(max_length=50, blank=True, null=True)
+    status = models.CharField(max_length=50, choices=[
+        ('available', 'Available'),
+        ('in_maintenance', 'In Maintenance'),
+        ('out_of_order', 'Out of Order')
+        ])
+    purchase_date = models.DateField(blank=True, null=True)
+    condition = models.CharField(max_length=20, choices=[
+        ('new', 'New'),
+        ('good', 'Good'),
+        ('fair', 'Fair'),
+        ('poor', 'Poor')
+    ])
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
 
