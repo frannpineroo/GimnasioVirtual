@@ -4,7 +4,6 @@ class Exercise(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    equipment = models.TextField(max_length=255, blank=True, null=True)
     muscle_group = models.TextField(max_length=255, blank=True, null=True)
     
     def __str__(self):
