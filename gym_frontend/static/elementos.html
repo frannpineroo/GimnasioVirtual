@@ -26,121 +26,25 @@
                 </a>
             </div>
 
-            <!-- Filtros -->
-            <div class="filters">
-                <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-running"></i> Grupo Muscular</label>
-                    <div class="custom-select" id="muscle-select">
-                        <div class="select-trigger">
-                            <div class="selected-value">
-                                <i class="fas fa-list"></i>
-                                <span>Todos los grupos</span>
-                            </div>
-                        </div>
-                        <div class="select-options">
-                            <div class="select-option muscle-option" data-value="">
-                                <i class="fas fa-list"></i>
-                                <span>Todos los grupos</span>
-                            </div>
-                            <div class="select-option muscle-option" data-value="pectorales">
-                                <i class="fas fa-chevron-circle-right"></i>
-                                <span>Pectorales</span>
-                            </div>
-                            <div class="select-option muscle-option" data-value="espalda">
-                                <i class="fas fa-chevron-circle-right"></i>
-                                <span>Espalda</span>
-                            </div>
-                            <div class="select-option muscle-option" data-value="hombros">
-                                <i class="fas fa-chevron-circle-right"></i>
-                                <span>Hombros</span>
-                            </div>
-                            <div class="select-option muscle-option" data-value="biceps">
-                                <i class="fas fa-chevron-circle-right"></i>
-                                <span>Bíceps</span>
-                            </div>
-                            <div class="select-option muscle-option" data-value="triceps">
-                                <i class="fas fa-chevron-circle-right"></i>
-                                <span>Tríceps</span>
-                            </div>
-                            <div class="select-option muscle-option" data-value="piernas">
-                                <i class="fas fa-chevron-circle-right"></i>
-                                <span>Piernas</span>
-                            </div>
-                            <div class="select-option muscle-option" data-value="abdominales">
-                                <i class="fas fa-chevron-circle-right"></i>
-                                <span>Abdominales</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="filter-group">
-                    <label class="filter-label"><i class="fas fa-dumbbell"></i> Elemento</label>
-                    <div class="custom-select" id="equipment-select">
-                        <div class="select-trigger">
-                            <div class="selected-value">
-                                <i class="fas fa-list"></i>
-                                <span>Todos los elementos</span>
-                            </div>
-                        </div>
-                        <div class="select-options">
-                            <div class="select-option equipment-option" data-value="">
-                                <i class="fas fa-list"></i>
-                                <span>Todos los elementos</span>
-                            </div>
-                            <div class="select-option equipment-option" data-value="mancuerna">
-                                <i class="fas fa-dumbbell"></i>
-                                <span>Mancuerna</span>
-                            </div>
-                            <div class="select-option equipment-option" data-value="barra">
-                                <i class="fas fa-grip-lines"></i>
-                                <span>Barra</span>
-                            </div>
-                            <div class="select-option equipment-option" data-value="polea">
-                                <i class="fas fa-weight-hanging"></i>
-                                <span>Polea</span>
-                            </div>
-                            <div class="select-option equipment-option" data-value="maquina">
-                                <i class="fas fa-cogs"></i>
-                                <span>Máquina</span>
-                            </div>
-                            <div class="select-option equipment-option" data-value="peso corporal">
-                                <i class="fas fa-user"></i>
-                                <span>Peso Corporal</span>
-                            </div>
-                            <div class="select-option equipment-option" data-value="banda">
-                                <i class="fas fa-ring"></i>
-                                <span>Banda Elástica</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Botón para resetear filtros -->
-                <div class="filter-group">
-                    <label class="filter-label" style="opacity: 0;">Acciones</label>
-                    <button id="reset-filters" class="btn btn-white">
-                        <i class="fas fa-sync-alt"></i> Resetear Filtros
-                    </button>
-                </div>
-            </div>
-
+            
             <!-- Tabla de Ejercicios -->
-            <div class="exercises-table-container">
-                <table class="exercises-table">
+            <div class="elements-table-container">
+                <table class="elements-table">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Grupo Muscular</th>
-                            <th>Elemento</th>
                             <th>Descripción</th>
-                            <th>Acciones</th>
+                            <th>Categoria</th>
+                            <th>Modelo</th>
+                            <th>Estado</th>
+                            <th>Fecha Inicio</th>
+                            <th>Condición</th>
                         </tr>
                     </thead>
-                    <tbody id="exercises-table-body">
+                    <tbody id="elements-table-body">
                         <tr id="loading-row">
                             <td colspan="5" style="text-align:center; padding: 30px;">
-                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando ejercicios...
+                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando elementos..
                             </td>
                         </tr>
                     </tbody>
@@ -170,7 +74,7 @@
     <!-- otros scripts -->
     <script src="js/sidebar.js"></script>
     <script src="js/header.js"></script>
-    <script src="js/ejercicios.js"></script>
+    <script src="js/elementos.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
