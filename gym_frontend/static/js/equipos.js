@@ -30,93 +30,93 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // GET: Obtener todos los elementos
 function getElementos() {
-    fetch('http://localhost:8000/api/elementos/') 
+    fetch('http://localhost:8000/api/equipos/') 
         .then(response => response.json())
         .then(data => {
-            allClients = data;
-            renderClientsTable(allClients);
+            allElements = data;
+            renderClientsTable(allElements);
         })
         .catch(error => {
-            console.error('Error al cargar los clientes:', error);
+            console.error('Error al cargar los equipos:', error);
         });
 }
 
-// POST: Crear un nuevo cliente
-function createClient(clienteData) {
-    console.log("Datos enviados:", clienteData);
-    fetch('http://localhost:8000/api/clientes/', { 
+// POST: Crear un nuevo equipo
+function createEquipe(equipeData) {
+    console.log("Datos enviados:", equipeData);
+    fetch('http://localhost:8000/api/equipos/', { 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(clienteData)
+        body: JSON.stringify(equipeData)
     })
     .then(response => {
         console.log("Status:", response.status);
         if (!response.ok) {
             return response.text().then(text => {  
                 console.log("Error response:", text);
-                throw new Error('No se pudo crear el cliente');
+                throw new Error('No se pudo crear el equipo');
             });
         }
         return response.json();
     })
     .then(data => {
-        getClients();
+        getElementos();
     })
     .catch(error => {
-        console.error('Error al crear el cliente:', error);
+        console.error('Error al crear el equipo:', error);
     });
 }
 
-// PUT: Actualizar un cliente existente
-function updateExercise(id, clienteData) {
-    fetch(`http://localhost:8000/api/clientes/${id}/`, {  
+// PUT: Actualizar un equipo existente
+function updateEquipment(id, equipeData) {
+    fetch(`http://localhost:8000/api/equipos/${id}/`, {  
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(clienteData)
+        body: JSON.stringify(equipeData)
     })
     .then(response => {
-        if (!response.ok) throw new Error('No se pudo actualizar el cliente');
+        if (!response.ok) throw new Error('No se pudo actualizar el equipo');
         return response.json();
     })
     .then(data => {
-        getClients();
+        getElementos();
     })
     .catch(error => {
-        console.error('Error al actualizar el cliente:', error);
+        console.error('Error al actualizar el equipo:', error);
     });
 }
 
-// DELETE: Eliminar un cliente
-function deleteClient(id) {
-    fetch(`http://localhost:8000/api/clientes/${id}/`, {  
+// DELETE: Eliminar un elemento
+function deleteEquipment(id) {
+    fetch(`http://localhost:8000/api/equipos/${id}/`, {  
         method: 'DELETE'
     })
     .then(response => {
-        if (!response.ok) throw new Error('No se pudo eliminar el cliente');
+        if (!response.ok) throw new Error('No se pudo eliminar el equipo');
         closeModals();
-        getClients();
+        getElementos();
     })
     .catch(error => {
-        console.error('Error al eliminar cliente:', error);
+        console.error('Error al eliminar equipo:', error);
     });
 }
 
-function renderClientsTable(clients) {
-    const tbody = document.getElementById('clients-table-body');
+function renderEquipmentsTable(equipment) {
+    const tbody = document.getElementById('elements-table-body');
 
-    if (!clients.length) {
+    if (!equipment.length) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="5" style="text-align: center; padding: 30px;">
                     <i class="fas fa-dumbbell" style="font-size: 48px; color: #32CD32; margin-bottom: 15px;"></i>
-                    <h3>No hay clientes registrados</h3>
-                    <p>Comienza creando tu primer cliente</p>
-                    <a href="nuevo-cliente.html" class="btn btn-white" style="margin-top: 15px;">
-                        <i class="fas fa-plus"></i> Agregar primer cliente
+                    <h3>No hay equipos registrados</h3>
+                    <p>Comienza creando tu primer equipo</p>
+                    <a href="nuevo-equipo.html" class="btn btn-white" style="margin-top: 15px;">
+                        <i class="fas fa-plus"></i> Agregar primer equipo
                     </a>
                 </td>
             </tr>
@@ -124,12 +124,14 @@ function renderClientsTable(clients) {
         return;
     }
 
-    tbody.innerHTML = clients.map(client => `
+    tbody.innerHTML = equipments.map(equipment => `
         <tr>
-            <td>${client.name || '-'}</td>
-            <td>${client.last_name || '-'}</td>
-            <td>${client.dni || '-'}</td>
-            <td>${capitalizeFirstLetter(client.experience_level)}</td>
+            <td>${equipment.name || '-'}</td>
+            <td>${equipment.description || '-'}</td>
+            <td>${equipment.category || '-'}</td>
+            <td>${equipment.model || '-'}</td>
+            <td>${capitalizeFirstLetter(equipment.status)}</td>
+            <td>${equipment.purchase_date || '-'}</td>
             <td>${capitalizeFirstLetter(client.goal)}</td>
             <td>${client.injuries || '-'}</td>
             <td>${client.status || '-'}</td>

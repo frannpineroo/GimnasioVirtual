@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .serializers import ExerciseSerializer, UserSerializer, CoachSerializer, ClientSerializer, AsignatureSerializer, ReminderSerializer, TrainingSessionSerializer, RutineSerializer, DayRutineSerializer, ExerciseRutineSerializer, ProgressRegisterSerializer, ElementSerializer
-from .models import Exercise, User, Coach, Client, Asignature, Reminder, TrainingSession, Rutine, DayRutine, ExerciseRutine, ProgressRegister, Element
+from .serializers import ExerciseSerializer, UserSerializer, CoachSerializer, ClientSerializer, AsignatureSerializer, ReminderSerializer, TrainingSessionSerializer, RutineSerializer, DayRutineSerializer, ExerciseRutineSerializer, ProgressRegisterSerializer, EquipmentSerializer
+from .models import Exercise, User, Coach, Client, Asignature, Reminder, TrainingSession, Rutine, DayRutine, ExerciseRutine, ProgressRegister, Equipment
 
 class ExerciseViewSet(viewsets.ModelViewSet):
     queryset = Exercise.objects.all()
@@ -46,6 +46,6 @@ class ProgressRegisterViewSet(viewsets.ModelViewSet):
     queryset = ProgressRegister.objects.all()
     serializer_class = ProgressRegisterSerializer
 
-class ElementViewSet(viewsets.ModelViewSet):
-    queryset = Element.objects.all()
-    serializer_class = ElementSerializer
+class EquipmentViewSet(viewsets.ModelViewSet):
+    queryset = Equipment.objects.all()
+    serializer_class = EquipmentSerializer

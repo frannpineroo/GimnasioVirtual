@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .api_views import (
-    ExerciseViewSet, UserViewSet, CoachViewSet, ClientViewSet, AsignatureViewSet, ReminderViewSet, TrainingSessionViewSet, RutineViewSet, DayRutineViewSet, ExerciseRutineViewSet, ProgressRegisterViewSet
+    ExerciseViewSet, UserViewSet, CoachViewSet, ClientViewSet, AsignatureViewSet, ReminderViewSet, TrainingSessionViewSet, RutineViewSet, DayRutineViewSet, ExerciseRutineViewSet, ProgressRegisterViewSet, EquipmentViewSet
 )
 
 
@@ -17,6 +17,7 @@ router.register(r'rutinas', RutineViewSet)
 router.register(r'dias-rutina', DayRutineViewSet)
 router.register(r'ejercicios-rutina', ExerciseRutineViewSet)
 router.register(r'registros-progreso', ProgressRegisterViewSet)
+router.register(r'equipos', EquipmentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
