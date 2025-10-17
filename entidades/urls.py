@@ -21,8 +21,8 @@ router.register(r'registros-progreso', ProgressRegisterViewSet)
 router.register(r'equipos', EquipmentViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('clientes/active', api_views.active_clients, name='active_clients')
+    path('clientes/active/', api_views.active_clients, name='active_clients'),
+    path('', include(router.urls))
 ]
 
 # urlpatterns = [
