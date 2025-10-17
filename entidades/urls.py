@@ -1,7 +1,8 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from . import api_views
 from .api_views import (
-    ExerciseViewSet, UserViewSet, CoachViewSet, ClientViewSet, active_client, AsignatureViewSet, ReminderViewSet, TrainingSessionViewSet, RutineViewSet, DayRutineViewSet, ExerciseRutineViewSet, ProgressRegisterViewSet, EquipmentViewSet
+    ExerciseViewSet, UserViewSet, CoachViewSet, ClientViewSet, active_clients, AsignatureViewSet, ReminderViewSet, TrainingSessionViewSet, RutineViewSet, DayRutineViewSet, ExerciseRutineViewSet, ProgressRegisterViewSet, EquipmentViewSet
 )
 
 
@@ -21,6 +22,7 @@ router.register(r'equipos', EquipmentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('clientes/active', api_views.active_clients, name='active_clients')
 ]
 
 # urlpatterns = [

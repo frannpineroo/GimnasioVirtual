@@ -53,7 +53,7 @@ class EquipmentViewSet(viewsets.ModelViewSet):
     serializer_class = EquipmentSerializer
 
 @api_view(['GET'])
-def active_client(request):
+def active_clients(request):
     """Retornar todos los clientes con status='active'"""
     clients = Client.objects.filter(status='active')
     serializer = ClientSerializer(clients, many=True)
