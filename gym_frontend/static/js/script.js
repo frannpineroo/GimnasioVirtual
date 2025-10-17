@@ -17,7 +17,7 @@ async function fetchAPI(endpoint) {
 
 // Obtener clientes activos
 async function getActiveClients() {
-    const data = await fetchAPI('/clientes/activos');
+    const data = await fetchAPI('/clientes/active');
     return data;
 }
 
