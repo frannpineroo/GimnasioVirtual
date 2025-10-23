@@ -13,7 +13,7 @@ class SidebarComponent {
         if (path.includes('ejercicios.html')) return 'ejercicios';
         if (path.includes('rutinas.html')) return 'rutinas';
         if (path.includes('nuevo-ejercicio.html')) return 'ejercicios';
-        if (path.includes('nueva-rutina.html')) return 'rutinas'; // Si tienes página para crear rutinas
+        if (path.includes('nueva-rutina.html')) return 'rutinas'; 
         return 'inicio';
     }
 
@@ -21,7 +21,7 @@ class SidebarComponent {
     async loadSidebar() {
         try {
             // Usar ruta relativa correcta
-            const response = await fetch('./components/sidebar.html');
+            const response = await fetch('/gym_frontend/static/components/sidebar.html');
             if (!response.ok) {
                 throw new Error('No se pudo cargar el sidebar');
             }
