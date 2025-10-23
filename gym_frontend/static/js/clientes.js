@@ -70,7 +70,7 @@ function createClient(clienteData) {
 }
 
 // PUT: Actualizar un cliente existente
-function updateExercise(id, clienteData) {
+function updateClient(id, clienteData) {
     fetch(`http://localhost:8000/api/clientes/${id}/`, {  
         method: 'PUT',
         headers: {
@@ -159,7 +159,7 @@ function filterClients(searchTerm) {
         (e.last_name && e.last_name.toLowerCase().includes(term)) ||
         (e.experience_level && e.experience_level.toLowerCase().includes(term)) ||
         (e.goal && e.goal.toLowerCase().includes(term)) ||
-        (e.injuries && e.injuries.toLowerCase().includes(term))
+        (e.injuries && e.injuries.toLowerCase().includes(term)) ||
         (e.status && e.status.toLowerCase().includes(term))
     );
     renderClientsTable(filtered);

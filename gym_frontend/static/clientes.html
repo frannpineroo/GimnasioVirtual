@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/clientes.css" />
 </head>
 <body>
+
     <!-- Contenido Principal -->
     <main class="main-content">
 
@@ -88,98 +89,74 @@
                     </thead>
                     <tbody id="clients-table-body">
                         <tr id="loading-row">
-                            <td colspan="7" style="text-align:center; padding: 30px;">
+                            <td colspan="8" style="text-align:center; padding: 30px;">
                                 <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando clientes...
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+            <!-- Modal de confirmación de eliminación -->
+            <div id="delete-modal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Confirmar eliminación</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>¿Estás seguro de que deseas eliminar este cliente?</p>
+                        <p class="warning">Esta acción no se puede deshacer.</p>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="cancel-delete" class="btn btn-white">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                        <button id="confirm-delete" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
-    <!-- Modal para agregar/editar cliente -->
-    <div class="modal" id="client-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-title">Nuevo Cliente</h2>
-                <button class="close-modal" id="close-modal">&times;</button>
-            </div>
-            <form id="client-form" class="client-form">
-                <input type="hidden" id="client-id" value="">
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="client-name">Nombre completo *</label>
-                        <input type="text" id="client-name" placeholder="Ej: Juan Pérez" required />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="client-dni">DNI *</label>
-                        <input type="text" id="client-dni" placeholder="Ej: 12345678A" required />
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="client-experience">Experiencia previa</label>
-                    <textarea id="client-experience" rows="2" placeholder="Describa la experiencia previa del cliente en entrenamiento..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="client-goal">Objetivo *</label>
-                    <select id="client-goal" required>
-                        <option value="">Selecciona un objetivo</option>
-                        <option value="perdida_grasa">Pérdida de grasa</option>
-                        <option value="ganancia_muscular">Ganancia muscular</option>
-                        <option value="mejora_rendimiento">Mejora de rendimiento</option>
-                        <option value="rehabilitacion">Rehabilitación</option>
-                        <option value="mantenimiento">Mantenimiento</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="client-injuries">Lesiones o condiciones médicas</label>
-                    <textarea id="client-injuries" rows="2" placeholder="Describa lesiones o condiciones médicas relevantes..."></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="client-status">Estado *</label>
-                    <select id="client-status" required>
-                        <option value="activo">Activo</option>
-                        <option value="inactivo">Inactivo</option>
-                    </select>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="button" class="btn btn-white" id="cancel-form">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn btn-save">
-                        <i class="fas fa-save"></i> <span id="submit-text">Guardar Cliente</span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // Cargar componentes
-        fetch('components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error cargando header:', error));
+        // Función para cargar componentes y luego inicializar scripts
+        async function loadComponents() {
+            try {
+                // Cargar header
+                const headerResponse = await fetch('components/header.html');
+                const headerData = await headerResponse.text();
+                const headerContainer = document.getElementById('header-container');
+                if (headerContainer) {
+                    headerContainer.innerHTML = headerData;
+                }
 
-        fetch('components/sidebar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error cargando sidebar:', error));
+                // Cargar sidebar
+                const sidebarResponse = await fetch('components/sidebar.html');
+                const sidebarData = await sidebarResponse.text();
+                const sidebarContainer = document.getElementById('sidebar-container');
+                if (sidebarContainer) {
+                    sidebarContainer.innerHTML = sidebarData;
+                }
+
+                // Esperar un momento para que el DOM se actualice
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                // Inicializar scripts de los componentes
+                if (typeof initSidebar === 'function') initSidebar();
+                if (typeof initHeader === 'function') initHeader();
+
+            } catch (error) {
+                console.error('Error cargando componentes:', error);
+            }
+        }
+
+        // Cargar componentes primero
+        loadComponents();
     </script>
     
-    <!-- otros scripts -->
+    <!-- Scripts - se cargan después de que el DOM esté listo -->
     <script src="js/sidebar.js"></script>
     <script src="js/header.js"></script>
     <script src="js/clientes.js"></script>
