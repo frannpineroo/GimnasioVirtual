@@ -34,7 +34,7 @@ function getElementos() {
         .then(response => response.json())
         .then(data => {
             allElements = data;
-            renderClientsTable(allElements);
+            renderEquipmentsTable(allElements);
         })
         .catch(error => {
             console.error('Error al cargar los equipos:', error);
@@ -105,10 +105,10 @@ function deleteEquipment(id) {
     });
 }
 
-function renderEquipmentsTable(equipment) {
+function renderEquipmentsTable(equipments) {
     const tbody = document.getElementById('elements-table-body');
 
-    if (!equipment.length) {
+    if (!equipments.length) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="5" style="text-align: center; padding: 30px;">
@@ -124,22 +124,19 @@ function renderEquipmentsTable(equipment) {
         return;
     }
 
-    tbody.innerHTML = equipments.map(equipment => `
+    tbody.innerHTML = equipments.map(equipments => `
         <tr>
-            <td>${equipment.name || '-'}</td>
-            <td>${equipment.description || '-'}</td>
-            <td>${equipment.category || '-'}</td>
-            <td>${equipment.model || '-'}</td>
-            <td>${capitalizeFirstLetter(equipment.status)}</td>
-            <td>${equipment.purchase_date || '-'}</td>
-            <td>${capitalizeFirstLetter(client.goal)}</td>
-            <td>${client.injuries || '-'}</td>
-            <td>${client.status || '-'}</td>
+            <td>${equipments.name || '-'}</td>
+            <td>${equipments.description || '-'}</td>
+            <td>${equipments.category || '-'}</td>
+            <td>${equipments.model || '-'}</td>
+            <td>${capitalizeFirstLetter(equipments.status)}</td>
+            <td>${equipments.purchase_date || '-'}</td>
             <td class="actions-cell">
-                <a href="nuevo-cliente.html?id=${client.id}" class="action-btn edit-btn" title="Editar cliente">
+                <a href="nuevo-equipo.html?id=${equipments.id}" class="action-btn edit-btn" title="Editar equipo">
                     <i class="fas fa-pen"></i>
                 </a>
-                <button class="action-btn delete-btn" data-id="${client.id}" title="Eliminar cliente">
+                <button class="action-btn delete-btn" data-id="${equipments.id}" title="Eliminar equipo">
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
@@ -148,23 +145,10 @@ function renderEquipmentsTable(equipment) {
 
     document.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', function () {
-            currentClientId = parseInt(this.dataset.id);
+            currentEquipmentId = parseInt(this.dataset.id);
             showDeleteModal();
         });
     });
-}
-
-function filterClients(searchTerm) {
-    const term = searchTerm.toLowerCase();
-    const filtered = allClients.filter(e =>
-        (e.name && e.name.toLowerCase().includes(term)) ||
-        (e.last_name && e.last_name.toLowerCase().includes(term)) ||
-        (e.experience_level && e.experience_level.toLowerCase().includes(term)) ||
-        (e.goal && e.goal.toLowerCase().includes(term)) ||
-        (e.injuries && e.injuries.toLowerCase().includes(term))
-        (e.status && e.status.toLowerCase().includes(term))
-    );
-    renderClientsTable(filtered);
 }
 
 function showDeleteModal() {
