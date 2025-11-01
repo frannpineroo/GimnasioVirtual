@@ -21,7 +21,7 @@ class SidebarComponent {
     async loadSidebar() {
         try {
             // Usar ruta relativa correcta
-            const response = await fetch('/gym_frontend/static/components/sidebar.html');
+            const response = await fetch('/gym_frontend/entrenador/components/sidebar.html');
             if (!response.ok) {
                 throw new Error('No se pudo cargar el sidebar');
             }
