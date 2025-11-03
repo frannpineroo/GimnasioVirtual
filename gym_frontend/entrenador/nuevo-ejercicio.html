@@ -12,72 +12,11 @@
     <link rel="stylesheet" href="/gym_frontend/static/css/components/sidebar.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/components/header.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/ejercicios.css" />
-    <style>
-        /* Estilos específicos para la página de agregar/editar ejercicio */
-        .image-upload-container {
-            margin-top: 20px;
-            border: 2px dashed var(--card-border);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            text-align: center;
-            transition: var(--transition-normal);
-            cursor: pointer;
-        }
-        
-        .image-upload-container:hover {
-            border-color: var(--primary-color);
-            background-color: rgba(50, 205, 50, 0.05);
-        }
-        
-        .image-upload-icon {
-            font-size: 48px;
-            color: var(--primary-color);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .image-preview {
-            margin-top: var(--spacing-md);
-            display: none;
-            position: relative;
-            max-width: 300px;
-        }
-        
-        .image-preview img {
-            width: 100%;
-            border-radius: var(--border-radius);
-            border: 1px solid var(--card-border);
-        }
-        
-        .remove-image-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(220, 53, 69, 0.8);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .form-actions {
-            display: flex;
-            gap: var(--spacing-md);
-            justify-content: flex-end;
-            margin-top: var(--spacing-lg);
-        }
-    </style>
+    <link rel="stylesheet" href="/gym_frontend/static/css/nuevo-ejercicio.css" />
 </head>
 <body>
-    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
-
     <!-- Contenido Principal -->
     <main class="main-content">
-        <!-- El header se insertará aquí -->
 
         <!-- Formulario de Ejercicio -->
         <div class="form-section">
@@ -158,8 +97,8 @@
         </div>
     </main>
 
-    <script src="/gym_frontend/static/js/components/sidebar.js"></script>
-    <script src="/gym_frontend/static/js/components/header.js"></script>
+    <script src="/gym_frontend/static/js/sidebar.js"></script>
+    <script src="/gym_frontend/static/js/header.js"></script>
     <script src="/gym_frontend/static/js/main.js"></script>
     <script src="/gym_frontend/static/js/nuevo-ejercicio.js"></script>
 </body>
