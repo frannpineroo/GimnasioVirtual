@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Inicializar componentes
     await initializeComponents();
     
-    // Inicializar página específica si existe
-    initializePageScript();
 });
 
 // Inicializar componentes comunes
@@ -25,21 +23,3 @@ async function initializeComponents() {
     }
 }
 
-// Inicializar script específico de la página
-function initializePageScript() {
-    const path = window.location.pathname;
-    let scriptPath = '';
-    
-    if (path.includes('ejercicios.html')) {
-        scriptPath = 'js/ejercicios.js';
-    } else if (path.includes('nuevo-ejercicio.html')) {
-        scriptPath = 'js/nuevo-ejercicio.js';
-    }
-    // Añadir más páginas según sea necesario
-    
-    if (scriptPath) {
-        const script = document.createElement('script');
-        script.src = scriptPath;
-        document.body.appendChild(script);
-    }
-}

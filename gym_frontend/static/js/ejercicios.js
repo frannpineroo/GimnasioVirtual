@@ -43,12 +43,10 @@ function getExercises() {
             return response.json();
         })
         .then(data => {
-            console.log('Datos recibidos de la API:', data);
             allExercises = Array.isArray(data) ? data : [];
             renderExercisesTable(allExercises);
         })
         .catch(error => {
-            console.error('Error al cargar ejercicios:', error);
             // opcional: render vacío
             renderExercisesTable([]);
         });
@@ -56,7 +54,6 @@ function getExercises() {
 
 // POST: Crear un nuevo ejercicio
 function createExercise(exerciseData) {
-    console.log("Datos enviados:", exerciseData);
     fetch('http://localhost:8000/api/ejercicios/', {
         method: 'POST',
         headers: {
@@ -65,7 +62,6 @@ function createExercise(exerciseData) {
         body: JSON.stringify(exerciseData)
     })
     .then(response => {
-        console.log("Status:", response.status);
         if (!response.ok) {
             return response.text().then(text => {
                 console.log("Error response:", text);
