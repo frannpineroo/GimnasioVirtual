@@ -1,9 +1,37 @@
 @import url('variables-entrenador.css');
 
+/* OVERRIDE DE ESTILOS DEL LAYOUT PRINCIPAL */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--bg-primary, #0a0a0a) !important;
+    overflow-x: hidden !important;
+}
+
+/* Ocultar sidebar y ajustar layout */
+.sidebar {
+    display: none !important;
+}
+
+.header {
+    display: none !important;
+}
+
+.main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
+
 /* ESTILOS ESPECÍFICOS PARA LA PÁGINA DE NUEVA RUTINA */
 .new-routine-section {
     padding: 20px;
     min-height: 100vh;
+    width: 100% !important;
+    max-width: 1400px;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+    background: var(--bg-primary, #0a0a0a);
 }
 
 .section-header {
@@ -13,6 +41,25 @@
     margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
     gap: var(--spacing-sm);
+}
+
+.filter-group {
+    position: relative;
+}
+
+.filter-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--font-size-normal);
+    display: flex;
+    align-items: center;
+}
+
+.filter-label i {
+    margin-right: var(--spacing-xs);
+    color: var(--primary-color);
 }
 
 .section-title {
