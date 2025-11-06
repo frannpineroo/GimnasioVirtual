@@ -7,7 +7,7 @@ let allClients = [];
 // Función para capitalizar la primera letra 
 function capitalizeFirstLetter(string) {
     if (!string || typeof string !== 'string') {
-        return '-'; // Devolver guión si es null/undefined
+        return '-'; 
     }
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -15,17 +15,23 @@ function capitalizeFirstLetter(string) {
 document.addEventListener('DOMContentLoaded', function () {
     getClients();
 
-    document.getElementById('search-input').addEventListener('input', function () {
-        filterClients(this.value);
-    });
+    const confirmDelete = document.getElementById('confirm-delete');
+    if (confirmDelete) {
+        confirmDelete.addEventListener('click', function () {
+            if (currentClientId) {
+                deleteClient(currentClientId);
+            }
+        });
+    } else {
+        console.warn("Elemento #confirm-delete no encontrado en el DOM.");
+    }
 
-    document.getElementById('confirm-delete').addEventListener('click', function () {
-        if (currentClientId) {
-            deleteClient(currentClientId);
-        }
-    });
-
-    document.getElementById('cancel-delete').addEventListener('click', closeModals);
+    const cancelDelete = document.getElementById('cancel-delete');
+    if (cancelDelete) {
+        cancelDelete.addEventListener('click', closeModals);
+    } else {
+        console.warn("Elemento #cancel-delete no encontrado en el DOM.");
+    }
 });
 
 // GET: Obtener todos los clientes
@@ -146,12 +152,15 @@ function renderClientsTable(clients) {
         </tr>
     `).join('');
 
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
-            currentClientId = parseInt(this.dataset.id);
-            showDeleteModal();
+    const deleteBtns = document.querySelectorAll('.delete-btn');
+    if (deleteBtns && deleteBtns.length) {
+        deleteBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                currentClientId = parseInt(this.dataset.id);
+                showDeleteModal();
+            });
         });
-    });
+    }
 }
 
 function filterClients(searchTerm) {
@@ -169,6 +178,10 @@ function filterClients(searchTerm) {
 
 function showDeleteModal() {
     const modal = document.getElementById('delete-modal');
+    if (!modal) {
+        console.warn("Elemento #delete-modal no encontrado.");
+        return;
+    }
     modal.classList.add('active');
 }
 

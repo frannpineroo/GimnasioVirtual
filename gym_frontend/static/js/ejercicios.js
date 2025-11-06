@@ -7,13 +7,12 @@ let allExercises = [];
 // Función para capitalizar la primera letra 
 function capitalizeFirstLetter(string) {
     if (!string || typeof string !== 'string') {
-        return '-'; // Devolver guión si es null/undefined
+        return '-'; 
     }
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Comprueba existencia y añade handlers de forma segura
     getExercises();
 
     const confirmDelete = document.getElementById('confirm-delete');
