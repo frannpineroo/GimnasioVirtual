@@ -129,6 +129,8 @@ function renderClientsTable(clients) {
             <td>${client.name || '-'}</td>
             <td>${client.last_name || '-'}</td>
             <td>${client.dni || '-'}</td>
+            <td>${client.email || '-'}</td>
+            <td>${client.phone || '-'}</td>
             <td>${capitalizeFirstLetter(client.experience_level)}</td>
             <td>${capitalizeFirstLetter(client.goal)}</td>
             <td>${client.injuries || '-'}</td>
