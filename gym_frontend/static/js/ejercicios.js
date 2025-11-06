@@ -141,7 +141,6 @@ function renderExercisesTable(exercises) {
         <tr>
             <td>${exercise.name || '-'}</td>
             <td>${capitalizeFirstLetter(exercise.muscle_group)}</td>
-            <td>${capitalizeFirstLetter(exercise.equipment)}</td>
             <td>${exercise.description || '-'}</td>
             <td class="actions-cell">
                 <a href="nuevo-ejercicio.html?id=${exercise.id}" class="action-btn edit-btn" title="Editar ejercicio">
