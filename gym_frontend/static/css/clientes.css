@@ -79,7 +79,6 @@
     transform: translateY(-3px);
 }
 
-/* FILTROS MEJORADOS - DISEÑO SIMILAR A EJERCICIOS */
 .filters {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
