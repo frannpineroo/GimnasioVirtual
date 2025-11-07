@@ -9,24 +9,35 @@ class Exercise(models.Model):
     def __str__(self):
         return self.name
 
-class User(models.Model):
+class Coach(models.Model):
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
     dni = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)
-    rol = models.CharField(max_length=50)
-    active = models.BooleanField(default=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    specialty = models.CharField(max_length=100, blank=True, null=True) 
+    certifications = models.TextField(blank=True, null=True)  # Certificaciones del coach
+    years_of_experience = models.IntegerField(default=0)
+    status = models.CharField(max_length=50, choices=[
+        ('active', 'Active'),
+        ('inactive', 'Inactive')
+    ], default='active')
+    hiring_date = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'coaches'
+        verbose_name = 'Coach'
+        verbose_name_plural = 'Coaches'
+        ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.name} {self.last_name}"
-
-class Coach(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='coach')
+        return f"{self.nombre} {self.apellido}"
     
-    def __str__(self):
-        return f"Coach: {self.user.name} {self.user.last_name}"
+    @property
+    def nombre_completo(self):
+        return f"{self.nombre} {self.apellido}"
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
