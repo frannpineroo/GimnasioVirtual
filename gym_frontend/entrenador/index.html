@@ -7,14 +7,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    
     <link rel="stylesheet" href="/gym_frontend/static/css/variables-entrenador.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/style.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/header.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/sidebar.css" />
 </head>
 <body>
-
     <!-- Contenido Principal -->
     <main class="main-content">
         <div class="welcome-section">
@@ -42,24 +40,6 @@
             </div>
         </div>
     </main>
-
-    <!-- Scripts para cargar componentes -->
-    <script>
-        // Cargar componentes
-        fetch('components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error cargando header:', error));
-
-        fetch('components/sidebar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error cargando sidebar:', error));
-    </script>
     
     <!-- Scripts de la aplicación -->
     <script src="/gym_frontend/static/js/script.js"></script>

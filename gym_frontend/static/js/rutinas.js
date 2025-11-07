@@ -22,17 +22,23 @@ function formatDate(dateString) {
 document.addEventListener('DOMContentLoaded', function () {
     getRutinas();
 
-    document.getElementById('search-input').addEventListener('input', function () {
-        filterRutinas(this.value);
-    });
+    const confirmDelete = document.getElementById('confirm-delete');
+    if (confirmDelete) {
+        confirmDelete.addEventListener('click', function () {
+            if (currentRoutineId) {
+                deleteExercise(currentRoutineId);
+            }
+        });
+    } else {
+        console.warn("Elemento #confirm-delete no encontrado en el DOM.");
+    }
 
-    document.getElementById('confirm-delete').addEventListener('click', function () {
-        if (currentRoutineId) {
-            deleteRutina(currentRoutineId);
-        }
-    });
-
-    document.getElementById('cancel-delete').addEventListener('click', closeModals);
+    const cancelDelete = document.getElementById('cancel-delete');
+    if (cancelDelete) {
+        cancelDelete.addEventListener('click', closeModals);
+    } else {
+        console.warn("Elemento #cancel-delete no encontrado en el DOM.");
+    }
 });
 
 // GET: Obtener todas las rutinas
@@ -40,7 +46,6 @@ function getRutinas() {
     fetch('http://localhost:8000/api/rutinas/') 
         .then(response => response.json())
         .then(data => {
-            console.log('Datos recibidos de la API:', data);
             if (data.length > 0) {
                 console.log('Primera rutina:', data[0]);
             }
@@ -201,28 +206,18 @@ function viewRutina(routineId) {
         });
 }
 
-// Mostrar modal de visualización
-function showViewModal(rutina) {
-    const modal = document.getElementById('view-routine-modal');
-    if (modal) {
-        // Aquí puedes personalizar el contenido del modal con los datos de la rutina
-        modal.style.display = 'flex';
-    }
-}
-
 function showDeleteModal() {
     const modal = document.getElementById('delete-modal');
+    if (!modal) {
+        console.warn("Elemento #delete-modal no encontrado.");
+        return;
+    }
     modal.classList.add('active');
 }
 
 function closeModals() {
-    const deleteModal = document.getElementById('delete-modal');
-    if (deleteModal) {
-        deleteModal.classList.remove('active');
-    }
-    
-    const viewModal = document.getElementById('view-routine-modal');
-    if (viewModal) {
-        viewModal.style.display = 'none';
+    const modal = document.getElementById('delete-modal');
+    if (modal) {
+        modal.classList.remove('active');
     }
 }

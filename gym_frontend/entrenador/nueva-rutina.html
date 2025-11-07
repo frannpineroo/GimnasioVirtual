@@ -9,16 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/variables-entrenador.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/style.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/components/sidebar.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/components/header.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/nueva-rutina.css" />
 </head>
 <body>
-    <!-- Sidebar y Header se cargarán dinámicamente con JS -->
 
     <!-- Contenido Principal -->
     <main class="main-content">
-        <!-- El header se insertará aquí -->
 
         <!-- Sección de Nueva Rutina -->
         <div class="new-routine-section">
@@ -39,14 +35,12 @@
                             <input type="text" id="routine-name" placeholder="Ej: Rutina Fuerza Inicial" required />
                         </div>
                         
-                        <div class="form-group">
-                            <label for="routine-client">Cliente *</label>
-                            <select id="routine-client" required>
-                                <option value="">Seleccionar cliente</option>
-                                <option value="1">Juan Pérez</option>
-                                <option value="2">María García</option>
-                                <option value="3">Carlos López</option>
-                            </select>
+                        <div class="filter-group">
+                            <label class="filter-label"><i class="fas fa-search"></i> Buscar cliente</label>
+                            <div class="search">
+                                <i class="fas fa-search"></i>
+                                <input type="text" placeholder="Nombre, Apellido, DNI" id="search-input" />
+                            </div>
                         </div>
                     </div>
                     
@@ -184,10 +178,6 @@
         </div>
     </div>
 
-    <script src="/gym_frontend/static/js/components/sidebar.js"></script>
-    <script src="/gym_frontend/static/js/components/header.js"></script>
-    <script src="/gym_frontend/static/js/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
     <script src="/gym_frontend/static/js/nueva-rutina.js"></script>
 </body>
 </html>

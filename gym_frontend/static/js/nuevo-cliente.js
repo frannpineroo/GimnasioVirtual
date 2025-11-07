@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const userName = document.getElementById('user-name').value.trim();
         const userLastName = document.getElementById('user-lastname').value.trim();
+        const dni = document.getElementById('user-dni').value.trim();
+        const email = document.getElementById('user-mail').value;
+        const phone = document.getElementById('user-phone').value.trim();
         const experienceLevel = document.getElementById('experience_level').value;
         const goal = document.getElementById('goal').value;
         const injuries = document.getElementById('injuries').value.trim();
@@ -14,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const clienteData = {
             name: userName,
             last_name: userLastName,
+            dni: dni,
+            email: email,
+            phone: phone,
             experience_level: experienceLevel,
             goal: goal,
             injuries: injuries || "",
@@ -28,24 +34,14 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(clienteData)
         })
         .then(response => {
-            console.log('=== RESPUESTA DEL SERVIDOR ===');
-            console.log('Status:', response.status);
-            console.log('Status Text:', response.statusText);
-            console.log('==============================');
-            
             if (!response.ok) {
                 return response.text().then(text => {
-                    console.error('Error response body:', text);
                     throw new Error(`Error ${response.status}: ${text}`);
                 });
             }
             return response.json();
         })
         .then(data => {
-            console.log('=== CLIENTE CREADO ===');
-            console.log('Respuesta:', data);
-            console.log('=======================');
-            
             alert('Cliente guardado exitosamente!');
             window.location.href = 'clientes.html';
         })

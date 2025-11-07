@@ -1,24 +1,5 @@
-@import url('variables.css');
+@import url('variables-entrenador.css');
 @import url('base.css');
-
-/* Header */
-.cabecera-cliente {
-    background: linear-gradient(135deg, var(--card-bg) 0%, var(--darker-bg) 100%);
-    border-bottom: 1px solid var(--card-border);
-    padding: var(--spacing-md) var(--spacing-lg);
-    box-shadow: var(--shadow-md);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.contenido-cabecera {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
 
 .info-cliente {
     display: flex;
@@ -34,11 +15,11 @@
     border: 2px solid var(--primary-color);
 }
 
-.detalles-cliente h1 {
+/* .detalles-cliente h1 {
     font-size: var(--font-size-title);
     font-weight: 700;
     margin-bottom: 4px;
-}
+} */
 
 .detalles-cliente p {
     color: var(--text-secondary);

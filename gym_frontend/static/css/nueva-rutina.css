@@ -1,9 +1,37 @@
-@import url('variables.css');
+@import url('variables-entrenador.css');
+
+/* OVERRIDE DE ESTILOS DEL LAYOUT PRINCIPAL */
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--bg-primary, #0a0a0a) !important;
+    overflow-x: hidden !important;
+}
+
+/* Ocultar sidebar y ajustar layout */
+.sidebar {
+    display: none !important;
+}
+
+.header {
+    display: none !important;
+}
+
+.main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0 !important;
+}
 
 /* ESTILOS ESPECÍFICOS PARA LA PÁGINA DE NUEVA RUTINA */
 .new-routine-section {
     padding: 20px;
     min-height: 100vh;
+    width: 100% !important;
+    max-width: 1400px;
+    margin: 0 auto !important;
+    box-sizing: border-box;
+    background: var(--bg-primary, #0a0a0a);
 }
 
 .section-header {
@@ -13,6 +41,73 @@
     margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
     gap: var(--spacing-sm);
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    background: linear-gradient(135deg, var(--card-bg) 0%, var(--darker-bg) 100%);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-md);
+}
+
+.filter-group {
+    position: relative;
+}
+
+.filter-label {
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: var(--font-size-normal);
+    display: flex;
+    align-items: center;
+}
+
+.filter-label i {
+    margin-right: var(--spacing-xs);
+    color: var(--primary-color);
+}
+
+/* Campo de búsqueda */
+.search {
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    border-radius: var(--border-radius);
+    padding: 0 16px;
+    border: 2px solid var(--card-border);
+    transition: var(--transition-fast);
+    height: 56px;
+}
+
+.search:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(50, 205, 50, 0.2);
+}
+
+.search input {
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    padding: 12px 0;
+    width: 100%;
+    font-family: var(--font-family);
+    font-size: var(--font-size-normal);
+}
+
+.search input:focus {
+    outline: none;
+}
+
+.search i {
+    color: var(--text-secondary);
+    margin-right: 10px;
 }
 
 .section-title {
