@@ -2,13 +2,12 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from . import api_views
 from .api_views import (
-    ExerciseViewSet, UserViewSet, CoachViewSet, ClientViewSet, active_clients, AsignatureViewSet, ReminderViewSet, TrainingSessionViewSet, RutineViewSet, DayRutineViewSet, ExerciseRutineViewSet, ProgressRegisterViewSet, EquipmentViewSet
+    ExerciseViewSet, CoachViewSet, ClientViewSet, active_clients, AsignatureViewSet, ReminderViewSet, TrainingSessionViewSet, RutineViewSet, DayRutineViewSet, ExerciseRutineViewSet, ProgressRegisterViewSet, EquipmentViewSet
 )
 
 
 router = DefaultRouter()
 router.register(r'ejercicios', ExerciseViewSet)
-router.register(r'usuarios', UserViewSet)
 router.register(r'entrenadores', CoachViewSet)
 router.register(r'clientes', ClientViewSet)
 router.register(r'asignaturas', AsignatureViewSet)

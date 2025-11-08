@@ -94,12 +94,21 @@ class TrainingSession(models.Model):
         return f"Session: {self.create_time}"
 
 class Rutine(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    time_week = models.PositiveBigIntegerField()
-    is_template = models.BooleanField(default=False)
-    time_creation = models.DateTimeField(auto_now_add=True)
-    coach = models.ForeignKey(Coach, on_delete=models.CASCADE, related_name='routines')
+    time_week = models.IntegerField()  # Duración en semanas
+    days_per_week = models.IntegerField(default=3)  # Días por semana
+    coach = models.ForeignKey(Coach, on_delete=models.SET_NULL, null=True, related_name='routines')
+    client = models.ForeignKey('Client', on_delete=models.CASCADE, null=True, blank=True, related_name='routines')
+    is_template = models.BooleanField(default=False)  # Si es plantilla reutilizable
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'routines'
+        verbose_name = 'Rutina'
+        verbose_name_plural = 'Rutinas'
+        ordering = ['-created_at']
     
     def __str__(self):
         return self.name
