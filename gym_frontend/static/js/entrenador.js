@@ -1,4 +1,4 @@
-// LÓGICA ESPECÍFICA PARA LA PÁGINA DE EJERCICIOS
+// LÓGICA ESPECÍFICA PARA LA PÁGINA DE ENTRENADORES
 
 // Variables globales
 let currentExerciseId = null;
