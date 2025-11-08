@@ -6,11 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = document.getElementById('exercise-name').value.trim();
         const muscleGroup = document.getElementById('muscle-group').value;
-        const equipment = document.getElementById('exercise-equipment').value;
         const description = document.getElementById('exercise-description').value.trim();
 
         // Validación mejorada
-        if (!name || !muscleGroup || !equipment) {
+        if (!name || !muscleGroup) {
             alert('Por favor completa los campos requeridos (*)');
             return;
         }
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const exerciseData = {
             name: name,
             muscle_group: muscleGroup,
-            equipment: equipment,
             description: description || ""
         };
 
