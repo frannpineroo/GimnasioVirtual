@@ -1,14 +1,10 @@
-/* EJERCICIOS.CSS - Sin estilos de modal */
-
 @import url('variables-entrenador.css');
-/* RESET Y ESTILOS BASE */
-/* ESTILOS ESPECÍFICOS PARA LA PÁGINA DE EJERCICIOS */
 
 .content-section {
     padding: 0;
 }
 
-.exercises-section {
+.coaches-section {
     padding: 0;
 }
 
@@ -21,8 +17,8 @@
     gap: var(--spacing-sm);
 }
 
-/* FORMULARIO DE EJERCICIO */
-.exercise-form {
+/* FORMULARIO DE ENTRENADOR */
+.coach-form {
     background: linear-gradient(135deg, var(--card-bg) 0%, var(--darker-bg) 100%);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-lg);
@@ -69,8 +65,8 @@
     justify-content: flex-end;
 }
 
-/* TABLA DE EJERCICIOS */
-.exercises-table-container {
+/* TABLA DE ENTRENADORS */
+.coaches-table-container {
     background: linear-gradient(135deg, var(--card-bg) 0%, var(--darker-bg) 100%);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
@@ -78,17 +74,17 @@
     overflow: hidden;
 }
 
-.exercises-table {
+.coaches-table {
     width: 100%;
     border-collapse: collapse;
     font-size: var(--font-size-normal);
 }
 
-.exercises-table thead {
+.coaches-table thead {
     background-color: rgba(50, 205, 50, 0.2);
 }
 
-.exercises-table th {
+.coaches-table th {
     padding: 16px 20px;
     text-align: left;
     font-weight: 600;
@@ -96,21 +92,21 @@
     border-bottom: 1px solid var(--card-border);
 }
 
-.exercises-table td {
+.coaches-table td {
     padding: 14px 20px;
     border-bottom: 1px solid var(--card-border);
     color: var(--text-secondary);
 }
 
-.exercises-table tbody tr {
+.coaches-table tbody tr {
     transition: var(--transition-fast);
 }
 
-.exercises-table tbody tr:hover {
+.coaches-table tbody tr:hover {
     background-color: rgba(50, 205, 50, 0.05);
 }
 
-.exercises-table tbody tr:last-child td {
+.coaches-table tbody tr:last-child td {
     border-bottom: none;
 }
 
@@ -159,11 +155,11 @@
 
 /* Responsive para tabla */
 @media (max-width: 768px) {
-    .exercises-table-container {
+    .coaches-table-container {
         overflow-x: auto;
     }
     
-    .exercises-table {
+    .coaches-table {
         min-width: 600px;
     }
 }
