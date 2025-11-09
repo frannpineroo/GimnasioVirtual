@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             alert('Cliente guardado exitosamente!');
-            window.location.href = 'clientes.html';
         })
         .catch(error => {
             console.error('=== ERROR ===');

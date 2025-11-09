@@ -1,9 +1,26 @@
 @import url('variables-entrenador.css');
 
-/* ESTILOS ESPECÍFICOS PARA LA PÁGINA DE CLIENTES */
+/* Layout principal con scroll */
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.main-content {
+    margin-left: 280px; /* Ajusta según el ancho de tu sidebar */
+    margin-top: 70px;   /* Ajusta según la altura de tu header */
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 0;
+}
+
 .clients-section {
     padding: 20px;
-    min-height: 100vh;
+    min-height: calc(100vh - 70px);
+    min-width: 1400px;
 }
 
 .section-header {
@@ -253,7 +270,10 @@
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
     border: 1px solid var(--card-border);
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
+    min-width: 800px;
+    max-height: calc(100vh - 300px);
 }
 
 .clients-table {
@@ -371,7 +391,7 @@
     width: 90%;
     max-width: 600px;
     max-height: 90vh;
-    overflow-y: auto;
+    overflow-y: auto;  
     border: 1px solid var(--card-border);
 }
 
