@@ -139,9 +139,12 @@ function renderCoachsTable(coachs) {
     tbody.innerHTML = coachs.map(coach => `
         <tr>
             <td>${coach.name || '-'}</td>
-            <td>${capitalizeFirstLetter(coach.muscle_group)}</td>
-            <td>${coach.description || '-'}</td>
-            <td class="actions-cell">
+            <td>${coach.last_name || '-'}</td>
+            <td>${coach.dni || '-'}</td>
+            <td>${coach.email || '-'}</td>
+            <td>${coach.phone || '-'}</td>
+            <td>${coach.speciality || '-'}</td>
+            <td>${capitalizeFirstLetter(coach.status)}</td>
                 <a href="nuevo-entrenador.html?id=${coach.id}" class="action-btn edit-btn" title="Editar entrenador">
                     <i class="fas fa-pen"></i>
                 </a>
