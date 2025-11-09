@@ -135,7 +135,6 @@ function renderClientsTable(clients) {
             <td>${client.name || '-'}</td>
             <td>${client.last_name || '-'}</td>
             <td>${client.dni || '-'}</td>
-            <td>${client.email || '-'}</td>
             <td>${client.phone || '-'}</td>
             <td>${capitalizeFirstLetter(client.experience_level)}</td>
             <td>${capitalizeFirstLetter(client.goal)}</td>
@@ -161,19 +160,6 @@ function renderClientsTable(clients) {
             });
         });
     }
-}
-
-function filterClients(searchTerm) {
-    const term = searchTerm.toLowerCase();
-    const filtered = allClients.filter(e =>
-        (e.name && e.name.toLowerCase().includes(term)) ||
-        (e.last_name && e.last_name.toLowerCase().includes(term)) ||
-        (e.experience_level && e.experience_level.toLowerCase().includes(term)) ||
-        (e.goal && e.goal.toLowerCase().includes(term)) ||
-        (e.injuries && e.injuries.toLowerCase().includes(term)) ||
-        (e.status && e.status.toLowerCase().includes(term))
-    );
-    renderClientsTable(filtered);
 }
 
 function showDeleteModal() {
