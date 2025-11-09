@@ -6,14 +6,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const name = document.getElementById('coach-name').value.trim();
         const lastName = document.getElementById('coach-last_name').value.trim();
-        const dni = document.getElementById('coach-dni').trim();
-        const email = document.getElementById('coach-email').trim();
-        const phone = document.getElementById('coach-phone').trim();
-        const speciality = document.getElementById('coach-speciality').trim();
-        const certification = document.getElementById('coach-certification').trim();
-        const yearsOfExp = document.getElementById('coach-years_of_exp').trim();
+        const dni = document.getElementById('coach-dni').value.trim();
+        const email = document.getElementById('coach-email').value.trim();
+        const phone = document.getElementById('coach-phone').value.trim();
+        const speciality = document.getElementById('coach-speciality').value.trim();
+        const certification = document.getElementById('coach-certification').value.trim();
+        const yearsOfExp = document.getElementById('coach-years_of_exp').value.trim();
         const status = document.getElementById('coach-status').value;
-        const hiringDate = document.getElementById('coach-hiring_date').trim();
+        const hiringDate = document.getElementById('coach-hiring_date').value.trim();
 
         // Validación mejorada
         if (!name || !lastName || !dni || !email || !phone || !speciality || !certification || !yearsOfExp || !status || !hiringDate) {
