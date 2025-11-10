@@ -13,3 +13,5 @@ __pycache__/
 .vscode/
 .idea/
 env/
+
+gym_backend/settings.py
