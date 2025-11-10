@@ -3,48 +3,147 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TRAINING! - Elementos</title>
+    <title>TRAINING! - Equipos</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/variables-entrenador.css" /> 
+    <link rel="stylesheet" href="/gym_frontend/static/css/variables-entrenador.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/style.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/header.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/sidebar.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/equipos.css" />
+    <link rel="stylesheet" href="/gym_frontend/static/css/modal-eliminar.css" />
 </head>
 <body>
     <!-- Contenido Principal -->
     <main class="main-content">
 
-        <!-- Sección de Ejercicios -->
-        <div class="elements-section">
+        <!-- Sección de Equipos -->
+        <div class="equipment-section">
             <div class="section-header">
                 <h2 class="section-title">Gestión de Equipos</h2>
                 <a href="nuevo-equipo.html" class="btn btn-white">
-                    <i class="fas fa-plus"></i> Nuevo Equipo
+                    <i class="fas fa-plus"></i> Agregar Equipo
                 </a>
             </div>
 
-            
-            <!-- Tabla de Equipo -->
-            <div class="elements-table-container">
-                <table class="elements-table">
+            <!-- Filtros -->
+            <div class="filters">
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-running"></i> Grupo Muscular</label>
+                    <div class="custom-select" id="muscle-select">
+                        <div class="select-trigger">
+                            <div class="selected-value">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los grupos</span>
+                            </div>
+                        </div>
+                        <div class="select-options">
+                            <div class="select-option muscle-option" data-value="">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los grupos</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="pectorales">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Pectorales</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="espalda">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Espalda</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="hombros">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Hombros</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="biceps">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Bíceps</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="triceps">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Tríceps</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="piernas">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Piernas</span>
+                            </div>
+                            <div class="select-option muscle-option" data-value="abdominales">
+                                <i class="fas fa-chevron-circle-right"></i>
+                                <span>Abdominales</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label"><i class="fas fa-dumbbell"></i> Elemento</label>
+                    <div class="custom-select" id="equipment-select">
+                        <div class="select-trigger">
+                            <div class="selected-value">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los elementos</span>
+                            </div>
+                        </div>
+                        <div class="select-options">
+                            <div class="select-option equipment-option" data-value="">
+                                <i class="fas fa-list"></i>
+                                <span>Todos los elementos</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="mancuerna">
+                                <i class="fas fa-dumbbell"></i>
+                                <span>Mancuerna</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="barra">
+                                <i class="fas fa-grip-lines"></i>
+                                <span>Barra</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="polea">
+                                <i class="fas fa-weight-hanging"></i>
+                                <span>Polea</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="maquina">
+                                <i class="fas fa-cogs"></i>
+                                <span>Máquina</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="peso corporal">
+                                <i class="fas fa-user"></i>
+                                <span>Peso Corporal</span>
+                            </div>
+                            <div class="select-option equipment-option" data-value="banda">
+                                <i class="fas fa-ring"></i>
+                                <span>Banda Elástica</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón para resetear filtros -->
+                <div class="filter-group">
+                    <label class="filter-label" style="opacity: 0;">Acciones</label>
+                    <button id="reset-filters" class="btn btn-white">
+                        <i class="fas fa-sync-alt"></i> Resetear Filtros
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabla de Equipos -->
+            <div class="equipment-table-container">
+                <table class="equipment-table">
                     <thead>
                         <tr>
                             <th>Nombre</th>
                             <th>Descripción</th>
-                            <th>Categoria</th>
+                            <th>Categoría</th>
                             <th>Modelo</th>
                             <th>Estado</th>
                             <th>Fecha Inicio</th>
                             <th>Condición</th>
                         </tr>
                     </thead>
-                    <tbody id="elements-table-body">
+                    <tbody id="equipment-table-body">
                         <tr id="loading-row">
                             <td colspan="5" style="text-align:center; padding: 30px;">
-                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando elementos..
+                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando equipos...
                             </td>
                         </tr>
                     </tbody>
@@ -53,23 +152,26 @@
         </div>
     </main>
 
-    <!-- Scripts para indexar sidebar y header -->
-    <script>
-        // Cargar componentes
-        fetch('/gym_frontend/static/components/header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error cargando header:', error));
-
-        fetch('/gym_frontend/static/components/sidebar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error cargando sidebar:', error));
-    </script>
+    <!-- Modal de Confirmación de Eliminación -->
+    <div class="modal-overlay" id="delete-modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3 class="modal-title">¿Estás seguro?</h3>
+            <p class="modal-message">
+                ¿Estás seguro que quieres eliminar este equipo? Esta acción no se puede deshacer.
+            </p>
+            <div class="modal-actions">
+                <button id="cancel-delete" class="modal-btn modal-btn-cancel">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button id="confirm-delete" class="modal-btn modal-btn-delete">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
     
     <!-- otros scripts -->
     <script src="/gym_frontend/static/js/sidebar.js"></script>

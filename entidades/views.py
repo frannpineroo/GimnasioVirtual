@@ -11,6 +11,3 @@ def exercise_page(request):
 
 def new_exercise(request):
     return render(request, 'nuevo-ejercicio.html')
-
-def user_page(request):
-    return render(request, 'usuario.html')

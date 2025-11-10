@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TRAINING! - Ejercicios</title>
+    <title>TRAINING! - Entrenadores</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
@@ -11,37 +11,40 @@
     <link rel="stylesheet" href="/gym_frontend/static/css/style.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/header.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/sidebar.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/ejercicios.css" />
+    <link rel="stylesheet" href="/gym_frontend/static/css/entrenadores.css" />
     <link rel="stylesheet" href="/gym_frontend/static/css/modal-eliminar.css" />
 </head>
 <body>
     <!-- Contenido Principal -->
     <main class="main-content">
 
-        <!-- Sección de Ejercicios -->
-        <div class="exercises-section">
+        <!-- Sección de Entrenadores -->
+        <div class="coaches-section">
             <div class="section-header">
-                <h2 class="section-title">Gestión de Ejercicios</h2>
-                <a href="nuevo-ejercicio.html" class="btn btn-white">
-                    <i class="fas fa-plus"></i> Agregar Ejercicio
+                <h2 class="section-title">Gestión de Entrenadores</h2>
+                <a href="nuevo-entrenador.html" class="btn btn-white">
+                    <i class="fas fa-plus"></i> Agregar Entrenador
                 </a>
             </div>
 
-            <!-- Tabla de Ejercicios -->
-            <div class="exercises-table-container">
-                <table class="exercises-table">
+            <!-- Tabla de Entrenadores -->
+            <div class="coaches-table-container">
+                <table class="coaches-table">
                     <thead>
                         <tr>
                             <th>Nombre</th>
-                            <th>Grupo Muscular</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
+                            <th>Apellido</th>
+                            <th>DNI</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Especialidad</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
-                    <tbody id="exercises-table-body">
+                    <tbody id="coaches-table-body">
                         <tr id="loading-row">
                             <td colspan="5" style="text-align:center; padding: 30px;">
-                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando ejercicios...
+                                <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando entrenadoress...
                             </td>
                         </tr>
                     </tbody>
@@ -58,7 +61,7 @@
             </div>
             <h3 class="modal-title">¿Estás seguro?</h3>
             <p class="modal-message">
-                ¿Estás seguro que quieres eliminar este ejercicio? Esta acción no se puede deshacer.
+                ¿Estás seguro que quieres eliminar este entrenador? Esta acción no se puede deshacer.
             </p>
             <div class="modal-actions">
                 <button id="cancel-delete" class="modal-btn modal-btn-cancel">
@@ -74,7 +77,7 @@
     <!-- otros scripts -->
     <script src="/gym_frontend/static/js/sidebar.js"></script>
     <script src="/gym_frontend/static/js/header.js"></script>
-    <script src="/gym_frontend/static/js/ejercicios.js"></script>
+    <script src="/gym_frontend/static/js/entrenador.js"></script>
     <script src="/gym_frontend/static/js/main.js"></script>
 </body>
 </html>

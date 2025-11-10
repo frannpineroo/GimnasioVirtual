@@ -1,11 +1,10 @@
-
 @import url('variables-entrenador.css');
 
 .content-section {
     padding: 0;
 }
 
-.equipment-section {
+.coaches-section {
     padding: 0;
 }
 
@@ -18,8 +17,8 @@
     gap: var(--spacing-sm);
 }
 
-/* FORMULARIO DE EQUIPOS */
-.equipment-form {
+/* FORMULARIO DE ENTRENADOR */
+.coach-form {
     background: linear-gradient(135deg, var(--card-bg) 0%, var(--darker-bg) 100%);
     border-radius: var(--border-radius-lg);
     padding: var(--spacing-lg);
@@ -66,8 +65,8 @@
     justify-content: flex-end;
 }
 
-/* TABLA DE EQUIPOS */
-.equipment-table-container {
+/* TABLA DE ENTRENADORS */
+.coaches-table-container {
     background: linear-gradient(135deg, var(--card-bg) 0%, var(--darker-bg) 100%);
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-md);
@@ -75,17 +74,17 @@
     overflow: hidden;
 }
 
-.equipment-table {
+.coaches-table {
     width: 100%;
     border-collapse: collapse;
     font-size: var(--font-size-normal);
 }
 
-.equipment-table thead {
+.coaches-table thead {
     background-color: rgba(50, 205, 50, 0.2);
 }
 
-.equipment-table th {
+.coaches-table th {
     padding: 16px 20px;
     text-align: left;
     font-weight: 600;
@@ -93,21 +92,21 @@
     border-bottom: 1px solid var(--card-border);
 }
 
-.equipment-table td {
+.coaches-table td {
     padding: 14px 20px;
     border-bottom: 1px solid var(--card-border);
     color: var(--text-secondary);
 }
 
-.equipment-table tbody tr {
+.coaches-table tbody tr {
     transition: var(--transition-fast);
 }
 
-.equipment-table tbody tr:hover {
+.coaches-table tbody tr:hover {
     background-color: rgba(50, 205, 50, 0.05);
 }
 
-.equipment-table tbody tr:last-child td {
+.coaches-table tbody tr:last-child td {
     border-bottom: none;
 }
 
@@ -156,11 +155,11 @@
 
 /* Responsive para tabla */
 @media (max-width: 768px) {
-    .equipment-table-container {
+    .coaches-table-container {
         overflow-x: auto;
     }
     
-    .equipment-table {
+    .coaches-table {
         min-width: 600px;
     }
 }

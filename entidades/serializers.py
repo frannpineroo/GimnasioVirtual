@@ -1,14 +1,9 @@
 from rest_framework import serializers
-from .models import Exercise, User, Coach, Client,  Asignature, Reminder, TrainingSession, Rutine, DayRutine, ExerciseRutine, ProgressRegister, Equipment
+from .models import Exercise, Coach, Client,  Asignature, Reminder, TrainingSession, Rutine, DayRutine, ExerciseRutine, ProgressRegister, Equipment
 
 class ExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
-        fields = '__all__'
-
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
         fields = '__all__'
 
 class CoachSerializer(serializers.ModelSerializer):

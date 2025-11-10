@@ -1,8 +1,8 @@
-// LÓGICA ESPECÍFICA PARA LA PÁGINA DE EJERCICIOS
+// LÓGICA ESPECÍFICA PARA LA PÁGINA DE ENTRENADORES
 
 // Variables globales
-let currentExerciseId = null;
-let allExercises = [];
+let currentCoachId = null;
+let allCoachs = [];
 
 // Función para capitalizar la primera letra 
 function capitalizeFirstLetter(string) {
@@ -13,13 +13,13 @@ function capitalizeFirstLetter(string) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    getExercises();
+    getCoachs();
 
     const confirmDelete = document.getElementById('confirm-delete');
     if (confirmDelete) {
         confirmDelete.addEventListener('click', function () {
-            if (currentExerciseId) {
-                deleteExercise(currentExerciseId);
+            if (currentCoachId) {
+                deleteCoach(currentCoachId);
             }
         });
     } else {
@@ -34,101 +34,101 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// GET: Obtener todos los ejercicios
-function getExercises() {
-    fetch('http://localhost:8000/api/ejercicios/')
+// GET: Obtener todos los entrenadores
+function getCoachs() {
+    fetch('http://localhost:8000/api/entrenadores/')
         .then(response => {
             if (!response.ok) throw new Error('Respuesta no OK: ' + response.status);
             return response.json();
         })
         .then(data => {
-            allExercises = Array.isArray(data) ? data : [];
-            renderExercisesTable(allExercises);
+            allCoachs = Array.isArray(data) ? data : [];
+            renderCoachsTable(allCoachs);
         })
         .catch(error => {
             // opcional: render vacío
-            renderExercisesTable([]);
+            renderCoachsTable([]);
         });
 }
 
-// POST: Crear un nuevo ejercicio
-function createExercise(exerciseData) {
-    fetch('http://localhost:8000/api/ejercicios/', {
+// POST: Crear un nuevo entrenador
+function createCoach(coachData) {
+    fetch('http://localhost:8000/api/entrenadores/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(exerciseData)
+        body: JSON.stringify(coachData)
     })
     .then(response => {
         if (!response.ok) {
             return response.text().then(text => {
                 console.log("Error response:", text);
-                throw new Error('No se pudo crear el ejercicio');
+                throw new Error('No se pudo crear el entrenador');
             });
         }
         return response.json();
     })
     .then(data => {
-        getExercises();
+        getCoachs();
     })
     .catch(error => {
-        console.error('Error al crear ejercicio:', error);
+        console.error('Error al crear entrenador:', error);
     });
 }
 
-// PUT: Actualizar un ejercicio existente
-function updateExercise(id, exerciseData) {
-    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {
+// PUT: Actualizar un entrenador existente
+function updateCoach(id, coachData) {
+    fetch(`http://localhost:8000/api/entrenadores/${id}/`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(exerciseData)
+        body: JSON.stringify(coachData)
     })
     .then(response => {
-        if (!response.ok) throw new Error('No se pudo actualizar el ejercicio');
+        if (!response.ok) throw new Error('No se pudo actualizar el entrenador');
         return response.json();
     })
     .then(data => {
-        getExercises();
+        getCoachs();
     })
     .catch(error => {
-        console.error('Error al actualizar ejercicio:', error);
+        console.error('Error al actualizar entrenador:', error);
     });
 }
 
-// DELETE: Eliminar un ejercicio
-function deleteExercise(id) {
-    fetch(`http://localhost:8000/api/ejercicios/${id}/`, {
+// DELETE: Eliminar un entrenador
+function deleteCoach(id) {
+    fetch(`http://localhost:8000/api/entrenadores/${id}/`, {
         method: 'DELETE'
     })
     .then(response => {
-        if (!response.ok) throw new Error('No se pudo eliminar el ejercicio');
+        if (!response.ok) throw new Error('No se pudo eliminar el entrenador');
         closeModals();
-        getExercises();
+        getCoachs();
     })
     .catch(error => {
-        console.error('Error al eliminar ejercicio:', error);
+        console.error('Error al eliminar entrenador:', error);
     });
 }
 
-function renderExercisesTable(exercises) {
-    const tbody = document.getElementById('exercises-table-body');
+function renderCoachsTable(coachs) {
+    const tbody = document.getElementById('coaches-table-body');
     if (!tbody) {
-        console.warn("Elemento #exercises-table-body no encontrado en el DOM.");
+        console.warn("Elemento #coaches-table-body no encontrado en el DOM.");
         return;
     }
 
-    if (!Array.isArray(exercises) || exercises.length === 0) {
+    if (!Array.isArray(coachs) || coachs.length === 0) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="5" style="text-align: center; padding: 30px;">
                     <i class="fas fa-dumbbell" style="font-size: 48px; color: #32CD32; margin-bottom: 15px;"></i>
-                    <h3>No hay ejercicios registrados</h3>
-                    <p>Comienza agregando tu primer ejercicio</p>
-                    <a href="nuevo-ejercicio.html" class="btn btn-white" style="margin-top: 15px;">
-                        <i class="fas fa-plus"></i> Agregar primer ejercicio
+                    <h3>No hay entrenadores registrados</h3>
+                    <p>Comienza agregando tu primer entrenador</p>
+                    <a href="nuevo-entrenador.html" class="btn btn-white" style="margin-top: 15px;">
+                        <i class="fas fa-plus"></i> Agregar primer entrenador
                     </a>
                 </td>
             </tr>
@@ -136,16 +136,19 @@ function renderExercisesTable(exercises) {
         return;
     }
 
-    tbody.innerHTML = exercises.map(exercise => `
+    tbody.innerHTML = coachs.map(coach => `
         <tr>
-            <td>${exercise.name || '-'}</td>
-            <td>${capitalizeFirstLetter(exercise.muscle_group)}</td>
-            <td>${exercise.description || '-'}</td>
-            <td class="actions-cell">
-                <a href="nuevo-ejercicio.html?id=${exercise.id}" class="action-btn edit-btn" title="Editar ejercicio">
+            <td>${coach.name || '-'}</td>
+            <td>${coach.last_name || '-'}</td>
+            <td>${coach.dni || '-'}</td>
+            <td>${coach.email || '-'}</td>
+            <td>${coach.phone || '-'}</td>
+            <td>${coach.speciality || '-'}</td>
+            <td>${capitalizeFirstLetter(coach.status)}</td>
+                <a href="nuevo-entrenador.html?id=${coach.id}" class="action-btn edit-btn" title="Editar entrenador">
                     <i class="fas fa-pen"></i>
                 </a>
-                <button class="action-btn delete-btn" data-id="${exercise.id}" title="Eliminar ejercicio">
+                <button class="action-btn delete-btn" data-id="${coach.id}" title="Eliminar entrenador">
                     <i class="fas fa-trash"></i>
                 </button>
             </td>
@@ -156,22 +159,22 @@ function renderExercisesTable(exercises) {
     if (deleteBtns && deleteBtns.length) {
         deleteBtns.forEach(btn => {
             btn.addEventListener('click', function () {
-                currentExerciseId = parseInt(this.dataset.id);
+                currentCoachId = parseInt(this.dataset.id);
                 showDeleteModal();
             });
         });
     }
 }
 
-function filterExercises(searchTerm) {
+function filterCoachs(searchTerm) {
     const term = (searchTerm || '').toLowerCase();
-    const filtered = allExercises.filter(e =>
+    const filtered = allCoachs.filter(e =>
         (e.name && e.name.toLowerCase().includes(term)) ||
         (e.muscle_group && e.muscle_group.toLowerCase().includes(term)) ||
         (e.equipment && e.equipment.toLowerCase().includes(term)) ||
         (e.description && e.description.toLowerCase().includes(term))
     );
-    renderExercisesTable(filtered);
+    renderCoachsTable(filtered);
 }
 
 function showDeleteModal() {
