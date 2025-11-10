@@ -1,19 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('exercise-form');
+    const form = document.getElementById('equipment-form');
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
 
-        const name = document.getElementById('exercise-name').value.trim();
-        const description = document.getElementById('exercise-description').value.trim();
-        const category = document.getElementById('category').trim();
-        const model = document.getElementById('model').trim();
+        const name = document.getElementById('equipment-name').value.trim();
+        const description = document.getElementById('equipment-description').value.trim();
+        const category = document.getElementById('category').value.trim();
+        const model = document.getElementById('model').value.trim();
         const status = document.getElementById('status').value;
-        const purchaseDate = document.getElementById('purchase-date').trim();
         const condition = document.getElementById('condition').value;
 
         // Validación mejorada
-        if (!name || !description || !category || !model || !status || !purchaseDate || !condition) {
+        if (!name || !description || !category || !model || !status || !condition) {
             alert('Por favor completa los campos requeridos (*)');
             return;
         }
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
             category: category,
             model: model,
             status: status,
-            purchase_date: purchaseDate,
             condition: condition
         };
 
@@ -60,8 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             
-            alert('Entrenador guardado exitosamente!');
-            window.location.href = 'entrenador.html';
+            alert('Equipo guardado exitosamente!');
+            window.location.href = 'nuevo-equipo.html';
         })
         .catch(error => {
             alert('Ocurrió un problema al guardar al entrenador: ' + error.message);

@@ -1,6 +1,15 @@
 
 @import url('variables-entrenador.css');
 
+.main-content {
+    margin-left: 280px; /* Ajusta según el ancho de tu sidebar */
+    margin-top: 70px;   /* Ajusta según la altura de tu header */
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 0;
+}
+
 .content-section {
     padding: 0;
 }
@@ -73,6 +82,9 @@
     box-shadow: var(--shadow-md);
     border: 1px solid var(--card-border);
     overflow: hidden;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 350px);
 }
 
 .equipment-table {
@@ -94,7 +106,7 @@
 }
 
 .equipment-table td {
-    padding: 14px 20px;
+    padding: 10px 16px;
     border-bottom: 1px solid var(--card-border);
     color: var(--text-secondary);
 }
