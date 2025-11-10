@@ -127,6 +127,16 @@ body {
     min-height: 100px;
 }
 
+/* CORRECCIÓN SOLAMENTE PARA EL FONDO DE LA LISTA DE MÚSCULOS */
+.form-group select {
+    background-color: #1a1a1a !important;
+}
+
+.form-group select option {
+    background: #1a1a1a !important;
+    color: var(--text-primary) !important;
+}
+
 /* Botones */
 .btn {
     padding: 12px 24px;
