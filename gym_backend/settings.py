@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+
 ROOT_URLCONF = 'gym_backend.urls'
 
 TEMPLATES = [
@@ -80,12 +81,12 @@ WSGI_APPLICATION = 'gym_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),      
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'ENGINE':'django.db.backends.postgresql',
+        'NAME':'gimnasio_virtual',
+        'USER':'postgres',
+        'PASSWORD':'ironmaiden',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 
@@ -133,6 +134,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'gym_frontend/static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5500',
-    'http://127.0.0.1:5500',
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "http://localhost:5501",
+    "http://127.0.0.1:5501",
 ]
+
+
