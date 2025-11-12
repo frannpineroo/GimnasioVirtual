@@ -28,7 +28,7 @@ urlpatterns = [
     # Rutas para el frontend
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
     path('cliente/', TemplateView.as_view(template_name='cliente.html'), name='cliente'),
-    path('entrenador/', TemplateView.as_view(template_name='entrenador.html'), name='entrenador'),
+    path('entrenador/', TemplateView.as_view(template_name='index.html'), name='entrenador'),
 ]
 
 if settings.DEBUG:

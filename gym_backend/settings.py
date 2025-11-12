@@ -72,20 +72,20 @@ DATABASE_URL = config('DATABASE_URL', default=None)
 
 DATABASE_URL = config('DATABASE_URL', default=None)
 
-if DATABASE_URL:
-    # parsear la URL que trae decouple (o Railway)
+DATABASE_URL = config('DATABASE_URL', default=None)
+
+# Verificar que DATABASE_URL exista Y no esté vacío
+if DATABASE_URL and DATABASE_URL.strip():
+    # Usar PostgreSQL en producción (Railway)
     DATABASES = {
         'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)
     }
 else:
+    # Usar SQLite en desarrollo local
     DATABASES = {
         'default': {
-            'ENGINE': config('DB_ENGINE', default='django.db.backends.postgresql'),
-            'NAME': config('DB_NAME', default=''),
-            'USER': config('DB_USER', default=''),
-            'PASSWORD': config('DB_PASSWORD', default=''),
-            'HOST': config('DB_HOST', default=''),
-            'PORT': config('DB_PORT', default='5432'),
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
 
