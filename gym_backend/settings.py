@@ -63,7 +63,6 @@ WSGI_APPLICATION = 'gym_backend.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 DATABASE_URL = config('DATABASE_URL', default=None)
 
 if DATABASE_URL:
