@@ -46,7 +46,12 @@ ROOT_URLCONF = 'gym_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'gym_frontend')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'gym_frontend'),
+            os.path.join(BASE_DIR, 'gym_frontend/entrenador'),
+            os.path.join(BASE_DIR, 'gym_frontend/cliente'),
+            os.path.join(BASE_DIR, 'gym_frontend/acceso'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
