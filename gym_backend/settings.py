@@ -131,10 +131,14 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
+    'gimnasiovirtual-production.up.railway.app',
     'http://localhost:5500',
     'http://127.0.0.1:5500',
     'http://localhost:5501',
     'http://127.0.0.1:5501',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://tu-app.up.railway.app',  # Tu dominio de Railway
+]
 
