@@ -16,7 +16,7 @@ class Coach(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     specialty = models.CharField(max_length=100, blank=True, null=True) 
-    certifications = models.TextField(blank=True, null=True)  # Certificaciones del coach
+    certifications = models.TextField(blank=True, null=True)
     years_of_experience = models.IntegerField(default=0)
     status = models.CharField(max_length=50, choices=[
         ('active', 'Active'),
@@ -33,11 +33,11 @@ class Coach(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.nombre} {self.apellido}"
+        return f"{self.name} {self.last_name}"
     
     @property
     def nombre_completo(self):
-        return f"{self.nombre} {self.apellido}"
+        return f"{self.name} {self.last_name}"
 
 class Client(models.Model):
     name = models.CharField(max_length=100)
@@ -61,6 +61,7 @@ class Client(models.Model):
     
     def __str__(self):
         return f"{self.name} {self.last_name}"
+    
     class Meta:
         ordering = ['-created_at']
 
@@ -96,11 +97,11 @@ class TrainingSession(models.Model):
 class Rutine(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
-    time_week = models.IntegerField()  # Duración en semanas
-    days_per_week = models.IntegerField(default=3)  # Días por semana
+    time_week = models.IntegerField()
+    days_per_week = models.IntegerField(default=3)
     coach = models.ForeignKey(Coach, on_delete=models.SET_NULL, null=True, related_name='routines')
     client = models.ForeignKey('Client', on_delete=models.CASCADE, null=True, blank=True, related_name='routines')
-    is_template = models.BooleanField(default=False)  # Si es plantilla reutilizable
+    is_template = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -148,8 +149,6 @@ class ProgressRegister(models.Model):
     def __str__(self):
         return f"Progress: {self.session} - {self.rutine_exercise}"
 
-from django.db import models
-
 class Equipment(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -159,7 +158,7 @@ class Equipment(models.Model):
         ('available', 'Available'),
         ('in_maintenance', 'In Maintenance'),
         ('out_of_order', 'Out of Order')
-        ])
+    ])
     purchase_date = models.DateField(blank=True, null=True)
     condition = models.CharField(max_length=20, choices=[
         ('new', 'New'),
