@@ -20,13 +20,20 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.decorators.cache import never_cache
+from django.shortcuts import render
+
+# Vista personalizada para el login que usa las rutas correctas de static
+def login_view(request):
+    return render(request, 'acceso/index.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('entidades.urls')),
     
+    # Usar vista personalizada para el login
+    path('', login_view, name='home'),
+    
     # Rutas principales
-    path('', TemplateView.as_view(template_name='acceso/index.html'), name='home'),
     path('cliente/', TemplateView.as_view(template_name='cliente/index.html'), name='cliente_dashboard'),
     path('entrenador/', TemplateView.as_view(template_name='entrenador/index.html'), name='entrenador_dashboard'),
     
@@ -37,9 +44,8 @@ urlpatterns = [
     path('entrenador/equipos/', TemplateView.as_view(template_name='entrenador/equipos.html'), name='entrenador_equipos'),
     path('entrenador/entrenadores/', TemplateView.as_view(template_name='entrenador/entrenadores.html'), name='entrenador_entrenadores'),
     
-    # NUEVAS RUTAS para componentes - con .html
-    path('entrenador/components/header.html', never_cache(TemplateView.as_view(template_name='entrenador/components/header.html')), name='header_component'),
-    path('entrenador/components/sidebar.html', never_cache(TemplateView.as_view(template_name='entrenador/components/sidebar.html')), name='sidebar_component'),
+    # Ruta para servir el CSS y JS directamente (como respaldo)
+    path('static/<path:path>', never_cache(TemplateView.as_view(template_name='../static/'))),
 ]
 
 # Servir archivos estáticos en desarrollo

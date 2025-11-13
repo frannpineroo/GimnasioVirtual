@@ -15,7 +15,7 @@ class Coach(models.Model):
     dni = models.CharField(max_length=20, unique=True)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
-    specialty = models.CharField(max_length=100, blank=True, null=True) 
+    specialty = models.CharField(max_length=100, blank=True, null=True)
     certifications = models.TextField(blank=True, null=True)
     years_of_experience = models.IntegerField(default=0)
     status = models.CharField(max_length=50, choices=[
@@ -57,7 +57,7 @@ class Client(models.Model):
         ('inactive', 'Inactive')
     ], default='active')
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)   
+    updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return f"{self.name} {self.last_name}"
