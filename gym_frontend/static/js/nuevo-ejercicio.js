@@ -1,5 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('exercise-form');
+    const cancelBtn = document.getElementById('cancel-btn');
+
+    // Función para obtener el token CSRF (NECESARIO para Django)
+    function getCSRFToken() {
+        const name = 'csrftoken';
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
     form.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -27,10 +45,12 @@ document.addEventListener('DOMContentLoaded', function () {
             description: description || ""
         };
 
-        fetch('http://localhost:8000/api/ejercicios/', {
+        // **CORREGIDO: Usar ruta relativa para producción**
+        fetch('/api/ejercicios/', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken() // **AGREGADO: CSRF Token**
             },
             body: JSON.stringify(exerciseData)
         })
@@ -45,11 +65,20 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             
-            alert('Ejercicio guardado exitosamente!');
-            window.location.href = 'nuevo-ejercicio.html';
+            alert('✅ Ejercicio guardado exitosamente!');
+            // **CORREGIDO: Redirigir a la página de ejercicios**
+            window.location.href = '/entrenador/ejercicios/';
         })
         .catch(error => {
-            alert('Ocurrió un problema al guardar el ejercicio: ' + error.message);
+            console.error('Error completo:', error);
+            alert('❌ Ocurrió un problema al guardar el ejercicio: ' + error.message);
         });
     });
+
+    // **AGREGADO: Manejar el botón cancelar**
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            window.location.href = '/entrenador/ejercicios/';
+        });
+    }
 });
