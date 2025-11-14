@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,14 +8,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/variables-entrenador.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/style.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/header.css" /> 
-    <link rel="stylesheet" href="/gym_frontend/static/css/sidebar.css" /> 
-    <link rel="stylesheet" href="/gym_frontend/static/css/clientes.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/modal-eliminar.css" />
+    <link rel="stylesheet" href="{% static 'css/variables-entrenador.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" /> 
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" /> 
+    <link rel="stylesheet" href="{% static 'css/clientes.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/modal-eliminar.css' %}" />
 </head>
 <body>
+    <!-- Contenedores para header y sidebar -->
+    <div id="header-container"></div>
+    <div id="sidebar-container"></div>
 
     <!-- Contenido Principal -->
     <main class="main-content">
@@ -23,7 +27,7 @@
         <div class="clients-section">
             <div class="section-header">
                 <h2 class="section-title">Gestión de Clientes</h2>
-                <a href="nuevo-cliente.html" class="btn btn-white">
+                <a href="/entrenador/nuevo-cliente/" class="btn btn-white">
                     <i class="fas fa-plus"></i> Nuevo Cliente
                 </a>
             </div>
@@ -62,7 +66,7 @@
                     </thead>
                     <tbody id="clients-table-body">
                         <tr id="loading-row">
-                            <td colspan="8" style="text-align:center; padding: 30px;">
+                            <td colspan="9" style="text-align:center; padding: 30px;">
                                 <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando clientes...
                             </td>
                         </tr>
@@ -71,6 +75,7 @@
             </div>
         </div>
     </main>
+
     <!-- Modal de Confirmación de Eliminación -->
     <div class="modal-overlay" id="delete-modal">
         <div class="modal-content">
@@ -79,7 +84,7 @@
             </div>
             <h3 class="modal-title">¿Estás seguro?</h3>
             <p class="modal-message">
-                ¿Estás seguro que quieres eliminar este ejercicio? Esta acción no se puede deshacer.
+                ¿Estás seguro que quieres eliminar este cliente? Esta acción no se puede deshacer.
             </p>
             <div class="modal-actions">
                 <button id="cancel-delete" class="modal-btn modal-btn-cancel">
@@ -97,7 +102,7 @@
         async function loadComponents() {
             try {
                 // Cargar header
-                const headerResponse = await fetch('components/header.html');
+                const headerResponse = await fetch('/entrenador/components/header.html');
                 const headerData = await headerResponse.text();
                 const headerContainer = document.getElementById('header-container');
                 if (headerContainer) {
@@ -105,7 +110,7 @@
                 }
 
                 // Cargar sidebar
-                const sidebarResponse = await fetch('components/sidebar.html');
+                const sidebarResponse = await fetch('/entrenador/components/sidebar.html');
                 const sidebarData = await sidebarResponse.text();
                 const sidebarContainer = document.getElementById('sidebar-container');
                 if (sidebarContainer) {
@@ -129,9 +134,9 @@
     </script>
     
     <!-- Scripts - se cargan después de que el DOM esté listo -->
-    <script src="/gym_frontend/static/js/sidebar.js"></script>
-    <script src="/gym_frontend/static/js/header.js"></script>
-    <script src="/gym_frontend/static/js/clientes.js"></script>
-    <script src="/gym_frontend/static/js/main.js"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/header.js' %}"></script>
+    <script src="{% static 'js/clientes.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

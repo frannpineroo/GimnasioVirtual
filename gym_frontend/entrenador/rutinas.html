@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,14 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/variables-entrenador.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/style.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/header.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/sidebar.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/rutinas.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/modal-eliminar.css" />
+    <link rel="stylesheet" href="{% static 'css/variables-entrenador.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/rutinas.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/modal-eliminar.css' %}" />
 </head>
 <body>
+    <!-- Contenedores para header y sidebar -->
+    <div id="header-container"></div>
+    <div id="sidebar-container"></div>
+
     <!-- Contenido Principal -->
     <main class="main-content">
 
@@ -22,7 +27,7 @@
         <div class="routines-section">
             <div class="section-header">
                 <h2 class="section-title">Gestión de Rutinas</h2>
-                <a href="nueva-rutina.html" class="btn btn-white">
+                <a href="/entrenador/nueva-rutina/" class="btn btn-white">
                     <i class="fas fa-plus"></i> Nueva Rutina
                 </a>
             </div>
@@ -215,7 +220,7 @@
         async function loadComponents() {
             try {
                 // Cargar header
-                const headerResponse = await fetch('components/header.html');
+                const headerResponse = await fetch('/entrenador/components/header.html');
                 const headerData = await headerResponse.text();
                 const headerContainer = document.getElementById('header-container');
                 if (headerContainer) {
@@ -223,7 +228,7 @@
                 }
 
                 // Cargar sidebar
-                const sidebarResponse = await fetch('components/sidebar.html');
+                const sidebarResponse = await fetch('/entrenador/components/sidebar.html');
                 const sidebarData = await sidebarResponse.text();
                 const sidebarContainer = document.getElementById('sidebar-container');
                 if (sidebarContainer) {
@@ -247,9 +252,9 @@
     </script>
     
     <!-- otros scripts -->
-    <script src="/gym_frontend/static/js/sidebar.js"></script>
-    <script src="/gym_frontend/static/js/header.js"></script>
-    <script src="/gym_frontend/static/js/main.js"></script>
-    <script src="/gym_frontend/static/js/rutinas.js"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/header.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/rutinas.js' %}"></script>
 </body>
 </html>

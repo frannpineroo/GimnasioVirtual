@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,14 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/variables-entrenador.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/style.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/header.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/sidebar.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/equipos.css" />
-    <link rel="stylesheet" href="/gym_frontend/static/css/modal-eliminar.css" />
+    <link rel="stylesheet" href="{% static 'css/variables-entrenador.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/header.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/equipos.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/modal-eliminar.css' %}" />
 </head>
 <body>
+    <!-- Contenedores para header y sidebar -->
+    <div id="header-container"></div>
+    <div id="sidebar-container"></div>
+
     <!-- Contenido Principal -->
     <main class="main-content">
 
@@ -22,7 +27,7 @@
         <div class="equipment-section">
             <div class="section-header">
                 <h2 class="section-title">Gestión de Equipos</h2>
-                <a href="nuevo-equipo.html" class="btn btn-white">
+                <a href="/entrenador/nuevo-equipo/" class="btn btn-white">
                     <i class="fas fa-plus"></i> Agregar Equipo
                 </a>
             </div>
@@ -43,7 +48,7 @@
                     </thead>
                     <tbody id="equipment-table-body">
                         <tr id="loading-row">
-                            <td colspan="5" style="text-align:center; padding: 30px;">
+                            <td colspan="7" style="text-align:center; padding: 30px;">
                                 <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #32CD32;"></i> Cargando equipos...
                             </td>
                         </tr>
@@ -73,11 +78,47 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Función para cargar componentes y luego inicializar scripts
+        async function loadComponents() {
+            try {
+                // Cargar header
+                const headerResponse = await fetch('/entrenador/components/header.html');
+                const headerData = await headerResponse.text();
+                const headerContainer = document.getElementById('header-container');
+                if (headerContainer) {
+                    headerContainer.innerHTML = headerData;
+                }
+
+                // Cargar sidebar
+                const sidebarResponse = await fetch('/entrenador/components/sidebar.html');
+                const sidebarData = await sidebarResponse.text();
+                const sidebarContainer = document.getElementById('sidebar-container');
+                if (sidebarContainer) {
+                    sidebarContainer.innerHTML = sidebarData;
+                }
+
+                // Esperar un momento para que el DOM se actualice
+                await new Promise(resolve => setTimeout(resolve, 100));
+
+                // Inicializar scripts de los componentes
+                if (typeof initSidebar === 'function') initSidebar();
+                if (typeof initHeader === 'function') initHeader();
+
+            } catch (error) {
+                console.error('Error cargando componentes:', error);
+            }
+        }
+
+        // Cargar componentes primero
+        loadComponents();
+    </script>
     
     <!-- otros scripts -->
-    <script src="/gym_frontend/static/js/sidebar.js"></script>
-    <script src="/gym_frontend/static/js/header.js"></script>
-    <script src="/gym_frontend/static/js/equipos.js"></script>
-    <script src="/gym_frontend/static/js/main.js"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/header.js' %}"></script>
+    <script src="{% static 'js/equipos.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
