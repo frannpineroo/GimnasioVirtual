@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             
             alert('Ejercicio guardado exitosamente!');
-            window.location.href = 'nuevo-ejercicio.html';
+            window.location.href = '/entrenador/ejercicios/';
         })
         .catch(error => {
             alert('Ocurrió un problema al guardar el ejercicio: ' + error.message);
