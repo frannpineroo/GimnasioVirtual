@@ -50,6 +50,7 @@ urlpatterns = [
     path('entrenador/rutinas/', TemplateView.as_view(template_name='entrenador/rutinas.html'), name='entrenador_rutinas'),
     path('entrenador/equipos/', TemplateView.as_view(template_name='entrenador/equipos.html'), name='entrenador_equipos'),
     path('entrenador/entrenadores/', TemplateView.as_view(template_name='entrenador/entrenadores.html'), name='entrenador_entrenadores'),
+    path('entrenador/nuevo-ejercicio/', TemplateView.as_view(template_name='entrenador/nuevo_ejercicio.html'), name='entrenador_nuevo_ejercicio'),
     
     # Ruta para servir el CSS y JS directamente (como respaldo)
     path('static/<path:path>', never_cache(TemplateView.as_view(template_name='../static/'))),
