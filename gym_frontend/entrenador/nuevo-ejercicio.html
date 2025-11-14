@@ -14,14 +14,13 @@
     <link rel="stylesheet" href="{% static 'css/nuevo-ejercicio.css' %}" />
 </head>
 <body>
-
     <!-- Contenido Principal -->
     <main class="main-content">
         <!-- Formulario de Ejercicio -->
         <div class="form-section">
             <div class="section-header">
                 <h2 class="section-title" id="form-title">Crear Nuevo Ejercicio</h2>
-                <a href="/entrenador/ejercicios/" class="btn btn-white">
+                <a href="{% url 'entrenador_ejercicios' %}" class="btn btn-white">
                     <i class="fas fa-arrow-left"></i> Volver
                 </a>
             </div>
