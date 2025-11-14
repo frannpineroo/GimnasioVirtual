@@ -26,12 +26,19 @@ from django.shortcuts import render
 def login_view(request):
     return render(request, 'acceso/index.html')
 
+# Vista para la página principal (entrenador)
+def home_view(request):
+    return render(request, 'entrenador/index.html')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('entidades.urls')),
     
-    # Usar vista personalizada para el login
-    path('', login_view, name='home'),
+    # CAMBIO: Ahora la raíz apunta al dashboard del entrenador
+    path('', home_view, name='home'),
+    
+    # El login queda en /login/
+    path('login/', login_view, name='login'),
     
     # Rutas principales
     path('cliente/', TemplateView.as_view(template_name='cliente/index.html'), name='cliente_dashboard'),
