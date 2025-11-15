@@ -6,50 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAINING! - Clientes</title>
 
-    <!-- CSS correcto -->
-    <link rel="stylesheet" href="{% static 'css/variables-cliente.css' %}">
-    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
-    <link rel="stylesheet" href="{% static 'css/header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/clientes.css' %}">
-
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Tus CSS -->
+    <link rel="stylesheet" href="{% static 'css/variables-cliente.css' %}">
+    <link rel="stylesheet" href="{% static 'css/clientes.css' %}">
 </head>
+
 <body>
 
+    <!-- SIDEBAR -->
     {% include 'componentes/sidebar.html' %}
-    
+
+    <!-- MAIN CONTENT WRAPPER -->
     <div class="main-container">
 
+        <!-- HEADER -->
         {% include 'componentes/header.html' %}
 
-        <section class="clientes-section">
-            <div class="section-header">
-                <h2>Clientes</h2>
-                <button class="btn-agregar">
-                    <i class="fas fa-plus"></i> Agregar Cliente
-                </button>
-            </div>
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="clientes-container">
 
-            <div class="clientes-list">
+            <h1 class="titulo">Clientes</h1>
+
+            <div class="clientes-grid">
                 {% for cliente in clientes %}
                 <div class="cliente-card">
-                    <div class="cliente-info">
+                    <div class="cliente-header">
                         <h3>{{ cliente.nombre }} {{ cliente.apellido }}</h3>
-                        <p>Edad: {{ cliente.edad }}</p>
-                        <p>Email: {{ cliente.email }}</p>
                     </div>
 
-                    <div class="cliente-actions">
-                        <a href="/entrenador/clientes/{{ cliente.id }}/" class="btn-ver">Ver</a>
-                        <a href="/entrenador/clientes/{{ cliente.id }}/editar/" class="btn-editar">Editar</a>
+                    <div class="cliente-body">
+                        <p><strong>Edad:</strong> {{ cliente.edad }}</p>
+                        <p><strong>Email:</strong> {{ cliente.email }}</p>
+                        <p><strong>DNI:</strong> {{ cliente.dni }}</p>
+                        <p><strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+
+                        <div class="cliente-btns">
+                            <a href="{% url 'detalle_cliente' cliente.id %}" class="btn-detalle">
+                                <i class="fa-solid fa-eye"></i> Ver Detalles
+                            </a>
+                            <a href="{% url 'editar_cliente' cliente.id %}" class="btn-editar">
+                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                            </a>
+                        </div>
                     </div>
                 </div>
+                {% empty %}
+                <p class="no-clientes">No hay clientes registrados.</p>
                 {% endfor %}
             </div>
-
-        </section>
-
+        </main>
     </div>
 
 </body>
