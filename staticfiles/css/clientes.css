@@ -1,28 +1,48 @@
 @import url('variables-entrenador.css');
 
+/* --- Correcciones globales --- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
 /* Layout principal con scroll */
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: hidden; /* el scroll principal lo maneja .main-content */
     height: 100vh;
 }
 
+/* MAIN CONTENT: usaremos posicionamiento fijo para ajustar exactamente al sidebar y header */
 .main-content {
-    margin-left: 280px; /* Ajusta según el ancho de tu sidebar */
-    margin-top: 70px;   /* Ajusta según la altura de tu header */
-    height: calc(100vh - 70px);
+    position: fixed;
+    left: 280px; /* Ajusta según el ancho real de tu sidebar; aquí mantenemos 280px como en tu original */
+    top: 70px;   /* Ajusta según la altura de tu header */
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    height: auto;
     overflow-y: auto;
-    overflow-x: auto;
-    padding: 0;
+    overflow-x: hidden;
+    background: transparent;
 }
 
+/* Contenedor de sección: quitar min-width forzado para evitar desplazamiento horizontal */
 .clients-section {
     padding: 20px;
     min-height: calc(100vh - 70px);
-    min-width: 1400px;
+    width: 100%;
+    max-width: 1600px; /* evita que se haga demasiado ancho en pantallas muy grandes */
+    margin: 0 auto;
 }
 
+/* Encabezado de sección */
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -99,11 +119,11 @@ body {
 .filters {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing-md);  /* CAMBIAR de var(--spacing-lg) */
+    gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
     background: linear-gradient(135deg, var(--card-bg) 0%, var(--darker-bg) 100%);
     border-radius: var(--border-radius-lg);
-    padding: 16px;  /* CAMBIAR de var(--spacing-lg) a 16px */
+    padding: 16px;
     border: 1px solid var(--card-border);
     box-shadow: var(--shadow-md);
 }
@@ -194,10 +214,10 @@ body {
 }
 
 .clients-table td {
-    padding: 10px 16px;  /* CAMBIAR de 14px 20px */
+    padding: 10px 16px;
     border-bottom: 1px solid var(--card-border);
     color: var(--text-secondary);
-    font-size: 14px; 
+    font-size: 14px;
 }
 
 .clients-table tbody tr {
