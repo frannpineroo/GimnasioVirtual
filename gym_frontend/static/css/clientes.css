@@ -421,3 +421,9 @@ body {
         min-width: 800px;
     }
 }
+
+.main-container {
+    margin-left: 280px;
+    padding: 30px;
+}
+
