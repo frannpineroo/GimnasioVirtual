@@ -16,10 +16,6 @@
     <link rel="stylesheet" href="{% static 'css/modal-eliminar.css' %}" />
 </head>
 <body>
-    <!-- Contenedores para header y sidebar -->
-    <div id="header-container"></div>
-    <div id="sidebar-container"></div>
-
     <!-- Contenido Principal -->
     <main class="main-content">
 
@@ -27,7 +23,7 @@
         <div class="equipment-section">
             <div class="section-header">
                 <h2 class="section-title">Gestión de Equipos</h2>
-                <a href="/entrenador/nuevo-equipo/" class="btn btn-white">
+                <a href="nuevo-equipo.html" class="btn btn-white">
                     <i class="fas fa-plus"></i> Agregar Equipo
                 </a>
             </div>
@@ -79,12 +75,13 @@
         </div>
     </div>
 
+    <!-- Scripts para indexar sidebar y header -->
     <script>
         // Función para cargar componentes y luego inicializar scripts
         async function loadComponents() {
             try {
                 // Cargar header
-                const headerResponse = await fetch('/entrenador/components/header.html');
+                const headerResponse = await fetch('components/header.html');
                 const headerData = await headerResponse.text();
                 const headerContainer = document.getElementById('header-container');
                 if (headerContainer) {
@@ -92,7 +89,7 @@
                 }
 
                 // Cargar sidebar
-                const sidebarResponse = await fetch('/entrenador/components/sidebar.html');
+                const sidebarResponse = await fetch('components/sidebar.html');
                 const sidebarData = await sidebarResponse.text();
                 const sidebarContainer = document.getElementById('sidebar-container');
                 if (sidebarContainer) {
