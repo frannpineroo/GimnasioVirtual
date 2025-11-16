@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from . import api_views
+from . import api_views, views  
 
 router = DefaultRouter()
 router.register(r'ejercicios', api_views.ExerciseViewSet)
@@ -17,7 +17,6 @@ router.register(r'equipos', api_views.EquipmentViewSet)
 
 urlpatterns = [
     path('clientes/active/', api_views.active_clients, name='active_clients'),
-    path('', include(router.urls))
     path('clientes/', views.client_page, name='entrenador_clientes'),
     path('nuevo-cliente/', views.new_client, name='entrenador_nuevo_cliente'),
     path('ejercicios/', views.exercise_page, name='entrenador_ejercicios'),
@@ -26,4 +25,6 @@ urlpatterns = [
     path('nueva-rutina/', views.new_routine, name='entrenador_nueva_rutina'),
     path('equipos/', views.equipment_page, name='entrenador_equipos'),
     path('nuevo-equipo/', views.new_equipment, name='entrenador_nuevo_equipo'),
+    
+    path('', include(router.urls))
 ]
