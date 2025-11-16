@@ -16,10 +16,6 @@
     <link rel="stylesheet" href="{% static 'css/modal-eliminar.css' %}" />
 </head>
 <body>
-    <!-- Contenedores para header y sidebar -->
-    <div id="header-container"></div>
-    <div id="sidebar-container"></div>
-
     <!-- Contenido Principal -->
     <main class="main-content">
 
@@ -27,7 +23,7 @@
         <div class="routines-section">
             <div class="section-header">
                 <h2 class="section-title">Gestión de Rutinas</h2>
-                <a href="/entrenador/nueva-rutina/" class="btn btn-white">
+                <a href="nueva-rutina.html" class="btn btn-white">
                     <i class="fas fa-plus"></i> Nueva Rutina
                 </a>
             </div>
@@ -220,7 +216,7 @@
         async function loadComponents() {
             try {
                 // Cargar header
-                const headerResponse = await fetch('/entrenador/components/header.html');
+                const headerResponse = await fetch('components/header.html');
                 const headerData = await headerResponse.text();
                 const headerContainer = document.getElementById('header-container');
                 if (headerContainer) {
@@ -228,7 +224,7 @@
                 }
 
                 // Cargar sidebar
-                const sidebarResponse = await fetch('/entrenador/components/sidebar.html');
+                const sidebarResponse = await fetch('components/sidebar.html');
                 const sidebarData = await sidebarResponse.text();
                 const sidebarContainer = document.getElementById('sidebar-container');
                 if (sidebarContainer) {
