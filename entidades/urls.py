@@ -18,4 +18,12 @@ router.register(r'equipos', api_views.EquipmentViewSet)
 urlpatterns = [
     path('clientes/active/', api_views.active_clients, name='active_clients'),
     path('', include(router.urls))
+    path('clientes/', views.client_page, name='entrenador_clientes'),
+    path('nuevo-cliente/', views.new_client, name='entrenador_nuevo_cliente'),
+    path('ejercicios/', views.exercise_page, name='entrenador_ejercicios'),
+    path('nuevo-ejercicio/', views.new_exercise, name='entrenador_nuevo_ejercicio'),
+    path('rutinas/', views.routine_page, name='entrenador_rutinas'),
+    path('nueva-rutina/', views.new_routine, name='entrenador_nueva_rutina'),
+    path('equipos/', views.equipment_page, name='entrenador_equipos'),
+    path('nuevo-equipo/', views.new_equipment, name='entrenador_nuevo_equipo'),
 ]
